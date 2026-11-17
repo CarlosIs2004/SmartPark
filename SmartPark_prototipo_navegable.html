@@ -6,7 +6,7 @@
 <title>SmartPark · Prototipo navegable (Grupo 4)</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:Inter,Segoe UI,Arial,sans-serif;background:#E7ECF2;color:#1A202C;min-height:100vh}
+body{font-family:Inter,"Segoe UI",Arial,sans-serif;background:#E7ECF2;color:#1A202C;min-height:100vh}
 button{font-family:inherit;cursor:pointer}
 input,select,textarea{font-family:inherit}
 .proto{position:sticky;top:0;z-index:50;background:#0B1F38;color:#fff;display:flex;align-items:center;gap:8px;padding:10px 18px;flex-wrap:wrap}
@@ -14,7 +14,7 @@ input,select,textarea{font-family:inherit}
 .tab{background:transparent;border:1px solid #2E4A6E;color:#C9D8EA;border-radius:999px;padding:7px 14px;font-size:14px;font-weight:600}
 .tab.on{background:#1565C0;border-color:#1565C0;color:#fff}
 .proto .sp{flex:1}
-.clock{font-size:13px;color:#C9D8EA;margin-right:8px}
+.clock{font-size:13px;color:#C9D8EA;margin-right:8px;font-variant-numeric:tabular-nums}
 .reset{background:#fff;color:#0B1F38;border:none;border-radius:8px;padding:7px 12px;font-size:13px;font-weight:700}
 .view{display:none;padding:22px}
 .view.on{display:block}
@@ -24,24 +24,29 @@ input,select,textarea{font-family:inherit}
 .sub{font-size:14px;color:#A9C1DB}
 .spacer{flex:1}
 .pill{padding:5px 11px;border-radius:999px;font-size:12.5px;font-weight:700;white-space:nowrap}
+.code{display:inline-block;font-size:11px;font-weight:800;color:#4A5568;background:#E2E8F0;border-radius:6px;padding:2px 7px;letter-spacing:.3px;white-space:nowrap;flex:none}
 .card{background:#fff;border:1px solid #E2E8F0;border-radius:16px;padding:20px}
 .h1{font-size:26px;font-weight:800;color:#0F2A4A}
 .h2{font-size:18px;font-weight:700;color:#0F2A4A}
 .muted{font-size:14px;color:#5A6B7F;line-height:1.45}
-.btn{display:flex;align-items:center;justify-content:center;border-radius:12px;padding:13px 18px;font-size:15px;font-weight:700;border:none;width:100%}
+.small{font-size:12px;color:#5A6B7F;line-height:1.4}
+.btn{display:flex;align-items:center;justify-content:center;border-radius:12px;padding:13px 18px;font-size:15px;font-weight:700;border:none;width:100%;text-align:center}
 .btn:disabled{opacity:.45;cursor:not-allowed}
 .primary{background:#1565C0;color:#fff}
 .secondary{background:#fff;color:#1565C0;border:2px solid #1565C0}
 .success{background:#2E7D32;color:#fff}
 .danger{background:#C62828;color:#fff}
 .dark{background:#0F2A4A;color:#fff}
+.sim{background:#FFF8E1;color:#7B5A12;border:1.5px dashed #D69E2E}
 .label{font-size:13px;font-weight:600;color:#4A5568;margin-bottom:6px;display:block}
 .input{border:1px solid #CBD5E0;border-radius:10px;padding:11px 13px;font-size:15px;background:#fff;width:100%}
-.ro{background:#EDF2F7;color:#2D3748;font-weight:700}
+.err{background:#FDE8E8;color:#9B2C2C;border-radius:10px;padding:10px 12px;font-size:13px;font-weight:600}
+.ok{background:#E6F4EA;color:#22543D;border-radius:10px;padding:10px 12px;font-size:13px;font-weight:600}
 .screen{max-width:1280px;margin:0 auto;background:#F4F6F9;border-radius:14px;overflow:hidden;box-shadow:0 10px 30px rgba(15,42,74,.15)}
 .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#0F2A4A;color:#fff;padding:12px 18px;border-radius:12px;font-size:14px;font-weight:600;opacity:0;transition:.25s;pointer-events:none;z-index:99;max-width:90vw;text-align:center}
 .toast.show{opacity:1}
-.help{max-width:1280px;margin:0 auto 14px;background:#fff;border-radius:12px;padding:12px 16px;font-size:13.5px;color:#2D3748;line-height:1.5;border-left:4px solid #1565C0}
+.help{max-width:1280px;margin:0 auto 14px;background:#fff;border-radius:12px;padding:12px 16px;font-size:13.5px;color:#2D3748;line-height:1.5;border-left:4px solid #1565C0;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.help .hb{background:#EAF2FD;color:#1565C0;border:1px solid #BBD3F2;border-radius:8px;padding:6px 10px;font-size:13px;font-weight:700}
 /* Entrada */
 .ent{display:flex;gap:26px;padding:28px 36px}
 .ent .l{flex:1;display:flex;flex-direction:column;gap:18px}
@@ -54,35 +59,37 @@ input,select,textarea{font-family:inherit}
 .note{border-radius:12px;padding:14px 16px;font-size:14px;line-height:1.45}
 .qrbox{display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center}
 .qrwrap{position:relative}
-.qrlock{position:absolute;inset:0;background:rgba(255,255,255,.93);display:flex;align-items:center;justify-content:center;text-align:center;font-weight:700;color:#5A6B7F;padding:20px;font-size:14px}
-.blocks{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-.blk{border:2px solid #CBD5E0;background:#fff;border-radius:14px;padding:18px 10px;font-size:18px;font-weight:800;color:#0F2A4A;display:flex;flex-direction:column;gap:4px;align-items:center}
-.blk small{font-size:12px;font-weight:600;color:#5A6B7F}
-.blk:hover{border-color:#1565C0;background:#EAF2FD}
-.steps .st{display:flex;gap:10px;align-items:center;font-size:14px;color:#2D3748;padding:4px 0}
-.num{width:26px;height:26px;border-radius:999px;background:#EDF2F7;color:#4A5568;font-weight:800;display:flex;align-items:center;justify-content:center;font-size:13px;flex:none}
-.st.on .num{background:#1565C0;color:#fff}
-.st.done .num{background:#2E7D32;color:#fff}
+.qrlock{position:absolute;inset:0;background:rgba(255,255,255,.94);display:flex;align-items:center;justify-content:center;text-align:center;font-weight:700;color:#5A6B7F;padding:20px;font-size:14px}
+.gate{display:flex;align-items:center;gap:10px;border-radius:12px;padding:12px 14px;font-size:14px;font-weight:700}
 /* Conductor */
 .phone{width:410px;margin:0 auto;background:#111;border-radius:42px;padding:10px;box-shadow:0 14px 40px rgba(0,0,0,.25)}
 .phone .scr{background:#F4F6F9;border-radius:32px;overflow:hidden;height:844px;display:flex;flex-direction:column}
-.phone .url{background:#E2E8F0;font-size:12px;color:#4A5568;padding:8px 14px;text-align:center}
+.phone .url{background:#E2E8F0;font-size:12px;color:#4A5568;padding:8px 14px;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .phone .topbar{height:54px;padding:0 16px;gap:10px;flex:none}
 .phone .brand{font-size:18px}
-.mbody{flex:1;overflow-y:auto;padding:16px 18px 26px;display:flex;flex-direction:column;gap:12px}
+.mbody{flex:1;overflow-y:auto;padding:14px 18px 26px;display:flex;flex-direction:column;gap:12px}
 .big{font-size:30px;font-weight:800;color:#1565C0}
 .range{display:flex;align-items:center;gap:8px;border-radius:10px;padding:10px 12px;font-size:13px;font-weight:600}
 .dot{width:9px;height:9px;border-radius:999px;flex:none}
 .pad{display:grid;grid-template-columns:repeat(3,46px);gap:6px;justify-content:center}
 .pad button{height:40px;border-radius:10px;border:1px solid #CBD5E0;background:#fff;font-size:18px;font-weight:700;color:#0F2A4A}
-.simnote{font-size:11.5px;color:#718096;text-align:center}
-.empty{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;text-align:center;height:100%;padding:30px}
-textarea.input{height:80px;resize:none;font-size:14px}
+.pad button:disabled{opacity:.35;cursor:not-allowed}
+.blocks{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.blk{border:2px solid #CBD5E0;background:#fff;border-radius:14px;padding:16px 6px;font-size:16px;font-weight:800;color:#0F2A4A;display:flex;flex-direction:column;gap:4px;align-items:center}
+.blk small{font-size:11px;font-weight:600;color:#5A6B7F}
+.blk:hover{border-color:#1565C0;background:#EAF2FD}
+.empty{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;text-align:center;min-height:100%;padding:24px}
+.msg{border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:6px}
+.inbox{border:1.5px dashed #A0AEC0;border-radius:12px;padding:12px;background:#fff;font-size:13px;display:flex;flex-direction:column;gap:6px}
+.codebig{font-size:26px;letter-spacing:6px;font-weight:800;color:#0F2A4A;text-align:center}
+textarea.input{height:76px;resize:none;font-size:14px}
+.sec{display:flex;align-items:center;gap:8px}
 /* Admin */
 .layout{display:flex;min-height:760px}
-.nav{width:220px;background:#fff;border-right:1px solid #E2E8F0;padding:18px 12px;display:flex;flex-direction:column;gap:3px;flex:none}
-.item{padding:10px 12px;border-radius:8px;font-size:14px;color:#2D3748;background:none;border:none;text-align:left;display:flex;justify-content:space-between;align-items:center}
+.nav{width:236px;background:#fff;border-right:1px solid #E2E8F0;padding:18px 12px;display:flex;flex-direction:column;gap:3px;flex:none}
+.item{padding:9px 10px;border-radius:8px;font-size:13.5px;color:#2D3748;background:none;border:none;text-align:left;display:flex;justify-content:space-between;align-items:center;gap:6px}
 .item.on{background:#EAF2FD;color:#1565C0;font-weight:700}
+.item .code{font-size:10px}
 .badge{background:#C62828;color:#fff;border-radius:999px;font-size:11px;padding:1px 7px;font-weight:700}
 .main{flex:1;padding:20px 24px;display:flex;flex-direction:column;gap:16px;min-width:0}
 .kpis{display:flex;gap:14px}
@@ -90,20 +97,26 @@ textarea.input{height:80px;resize:none;font-size:14px}
 .kpi .v{font-size:28px;font-weight:800}
 .grid{display:flex;gap:16px}
 .colL{flex:1;display:flex;flex-direction:column;gap:16px;min-width:0}
-.colR{width:340px;display:flex;flex-direction:column;gap:16px;flex:none}
+.colL .card{overflow-x:auto}
+td.wr{white-space:normal}
+.colR{width:350px;display:flex;flex-direction:column;gap:16px;flex:none}
 table{width:100%;border-collapse:collapse;font-size:13px}
 th{background:#EDF2F7;color:#4A5568;text-align:left;padding:8px 10px;font-weight:600}
-td{padding:8px 10px;border-bottom:1px solid #E2E8F0;white-space:nowrap}
+td{padding:8px 10px;border-bottom:1px solid #E2E8F0;white-space:nowrap;vertical-align:top}
 .tag{display:inline-block;padding:3px 9px;border-radius:999px;font-size:12px;font-weight:700}
-.lnk{color:#1565C0;font-weight:700;background:none;border:none;font-size:13px;padding:0}
+.lnk{color:#1565C0;font-weight:700;background:none;border:none;font-size:13px;padding:0;text-align:left}
 .lnk:disabled{color:#A0AEC0;cursor:not-allowed}
-.alert{border-radius:10px;padding:10px 12px;font-size:13px;line-height:1.4}
+.alert{border-radius:10px;padding:10px 12px;font-size:13px;line-height:1.4;display:flex;flex-direction:column;gap:6px}
+.alert .acts{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.alert select,.alert input{font-size:12.5px;padding:5px 8px;border:1px solid #CBD5E0;border-radius:8px}
 .sbtn{border:1.5px solid #1565C0;color:#1565C0;background:#fff;border-radius:10px;padding:9px 12px;font-size:13px;font-weight:700;width:100%}
 .form{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .kv{display:flex;justify-content:space-between;align-items:center;font-size:14px;padding:6px 0;border-bottom:1px dashed #E2E8F0;gap:10px}
 .kv b{color:#0F2A4A}
 .live{font-variant-numeric:tabular-nums}
-.log{font-size:12px;color:#4A5568;max-height:170px;overflow:auto;display:flex;flex-direction:column;gap:4px}
+.log{font-size:12px;color:#4A5568;max-height:190px;overflow:auto;display:flex;flex-direction:column;gap:4px}
+.chk{display:flex;gap:8px;align-items:flex-start;font-size:13px;color:#2D3748}
+.login{display:flex;align-items:center;justify-content:center;min-height:700px;width:100%}
 </style>
 </head>
 <body>
@@ -112,29 +125,21 @@ td{padding:8px 10px;border-bottom:1px solid #E2E8F0;white-space:nowrap}
   <span class="ttl">SmartPark · Prototipo navegable</span>
   <button class="tab on" data-v="entrada">1. Pantalla de la entrada</button>
   <button class="tab" data-v="conductor">2. Página del conductor (celular)</button>
-  <button class="tab" data-v="admin">3. Panel del administrador</button>
+  <button class="tab" data-v="admin">3. Panel del encargado</button>
   <span class="sp"></span>
   <span class="clock" id="clock"></span>
   <button class="reset" onclick="resetAll()">Reiniciar demostración</button>
 </div>
 
-<!-- ============ 1. ENTRADA ============ -->
+<!-- ============ 1. ENTRADA (P-12) ============ -->
 <section class="view on" id="v-entrada">
-  <div class="help">Pantalla que el conductor ve al llegar (en la demostración, en el computador del encargado). <b>1)</b> Confirme la placa, <b>2)</b> elija el bloque al que va, <b>3)</b> escanee el QR. Pruebe también «Esta no es mi placa»: el encargado la corrige desde su panel.</div>
+  <div class="help"><span><span class="code">P-12</span> Pantalla de la entrada. La cámara lee la placa; si hay puestos, se muestra la placa leída junto al QR. El conductor escanea el QR con su celular y allí elige su destino. Pruebe también «Esta no es mi placa»: el encargado la corrige desde su panel.</span></div>
   <div class="screen">
     <div class="topbar"><div class="logo">P</div><div class="brand">SmartPark</div><div class="sub">Pantalla de la entrada</div><div class="spacer"></div>
       <div class="pill" style="background:#1E4D7B;color:#D6E6F7" id="ent-disp">Puestos disponibles: —</div></div>
     <div class="ent">
       <div class="l" id="ent-left"></div>
-      <div class="r">
-        <div class="card qrbox">
-          <div class="h2">Escanee el código QR con su celular</div>
-          <div class="qrwrap"><div id="qr"></div><div class="qrlock" id="qr-lock"></div></div>
-          <div class="muted" id="qr-ref"></div>
-          <button class="btn primary" id="scan" disabled>Simular escaneo del QR con el celular</button>
-        </div>
-        <div class="card steps" id="ent-steps"></div>
-      </div>
+      <div class="r" id="ent-right"></div>
     </div>
   </div>
 </section>
@@ -143,19 +148,19 @@ td{padding:8px 10px;border-bottom:1px solid #E2E8F0;white-space:nowrap}
 <section class="view" id="v-conductor">
   <div class="help" id="help-conductor"></div>
   <div class="phone"><div class="scr">
-    <div class="url">🔒 smartpark.app/estancia/<span id="c-ref">—</span></div>
-    <div class="topbar"><div class="logo">P</div><div class="brand">SmartPark</div><div class="spacer"></div><div class="pill" id="c-timer" style="display:none"></div></div>
+    <div class="url" id="c-url">🔒 smartpark.app</div>
+    <div class="topbar"><div class="logo" style="cursor:pointer" onclick="phoneHome()" title="Pantalla principal">P</div><div class="brand">SmartPark</div><div class="spacer"></div><div class="pill" id="c-timer" style="display:none"></div></div>
     <div class="mbody" id="c-body"></div>
   </div></div>
 </section>
 
-<!-- ============ 3. ADMIN ============ -->
+<!-- ============ 3. ENCARGADO ============ -->
 <section class="view" id="v-admin">
-  <div class="help">Panel del encargado (administrador). Use el menú lateral: corrija placas, simule los eventos de hardware, cobre deteniendo el tiempo de la estancia y autorice la salida. Los cambios se reflejan en la entrada y en el celular del conductor.</div>
+  <div class="help" id="help-admin"></div>
   <div class="screen">
-    <div class="topbar"><div class="logo">P</div><div class="brand">SmartPark</div><div class="sub">Panel del administrador</div><div class="spacer"></div>
-      <div style="font-size:14px;color:#D6E6F7">Encargado: encargado01 · Cerrar sesión</div></div>
-    <div class="layout">
+    <div class="topbar"><div class="logo">P</div><div class="brand">SmartPark</div><div class="sub">Panel del encargado</div><div class="spacer"></div>
+      <div style="font-size:14px;color:#D6E6F7" id="a-user"></div></div>
+    <div class="layout" id="a-layout">
       <div class="nav" id="a-nav"></div>
       <div class="main" id="a-main"></div>
     </div>
@@ -165,55 +170,74 @@ td{padding:8px 10px;border-bottom:1px solid #E2E8F0;white-space:nowrap}
 <div class="toast" id="toast"></div>
 
 <script>
-/* ===================== CONSTANTES DEL MAPA MÓVIL ===================== */
-const PX_PER_M = 4.4;                      // 44 px = 10 m
-const LANES = [163, 267, 371];             // carriles (y)
-const AISLE_X = 6;                         // pasillo vertical izquierdo
-const ROWS = [ // fila, y, nombres visibles en el celular
+/* =====================================================================
+   SmartPark · Prototipo navegable · Grupo 4
+   Sigue el documento Grupo4_Taller2.1: PR-01 a PR-05, RF-01 a RF-24,
+   reglas RN-01 a RN-12 y pantallas P-00 a P-13. Datos ficticios.
+   ===================================================================== */
+
+/* ---------- Mapa del celular ---------- */
+const PX_PER_M = 4.4;                       // 44 px = 10 m
+const LANES = [163, 267, 371];
+const AISLE_X = 6;
+const ROWS = [
   {L:"A", y:82,  names:["A-01","A-02","A-03","A-04","A-05","A-06"], lane:163, door:140},
   {L:"B", y:186, names:["B-10","B-11","B-12","B-13","B-14","B-15"], lane:163, door:186},
   {L:"C", y:290, names:["C-01","C-02","C-03","C-04","C-05","C-06"], lane:267, door:290}];
 const MAPSPOTS = ROWS.flatMap(r=>r.names.map((n,k)=>({n,x:14+k*55,y:r.y,row:r})));
-const ENTRY = {x:62,y:415};
+const OUTSIDE = {x:62,y:458};               // vehículo antes de la talanquera
 const BLOCKS = [{n:"Bloque A",x:14},{n:"Bloque B",x:124},{n:"Bloque C",x:234}];
-// Orden de cercanía de los puestos a cada bloque de destino (RF-05)
-const NEAR = {
+const ZONES = {"Vestíbulo":{x:268,y:418},"Bloque A":{x:65,y:39},"Bloque B":{x:176,y:39},"Bloque C":{x:286,y:39}};
+const NEAR = { // orden de cercanía de los puestos a cada bloque de destino (RF-05); desempate: menor número
   "Bloque A":["A-01","A-02","A-03","B-10","B-11","A-04","C-01","C-02","B-12","A-05","C-03","B-13","A-06","C-04","B-14","C-05","B-15","C-06"],
   "Bloque B":["B-12","B-13","B-11","A-03","A-04","B-14","B-10","A-02","A-05","C-03","C-04","B-15","A-01","A-06","C-02","C-05","C-01","C-06"],
   "Bloque C":["A-05","A-06","B-15","B-14","A-04","C-05","C-06","B-13","C-04","A-03","B-12","C-03","A-02","B-11","C-02","A-01","B-10","C-01"]};
 
-/* ===================== ESTADO ===================== */
+/* ---------- Estado ---------- */
 let S;
 function initState(){
   const spots={};
-  const seed = {A:["D","O","D","R","O","D","D","O","D","D","O","D"], B:["O","D","D","D","O","D","R","D","D","O","D","D"], C:["D","D","O","D","D","O","D","D","R","D","O","D"]};
+  const seed={A:["D","O","D","R","O","D","D","O","D","D","O","D"],B:["O","D","D","D","O","D","R","D","D","O","D","D"],C:["D","D","O","D","D","O","D","D","R","D","O","D"]};
   seed.A.forEach((s,i)=>spots["A-"+String(i+1).padStart(2,"0")]=s);
   seed.B.forEach((s,i)=>spots["B-"+(i+10)]=s);
   seed.C.forEach((s,i)=>spots["C-"+String(i+1).padStart(2,"0")]=s);
-  S={cfg:{tarifa:1.00,fraccion:60,reserva:5,radio:10,gracia:15},
-     spots, offset:0,
-     entrada:{read:"DEM-1234",plate:"DEM-1234",status:"leida",dest:null,stayId:null},
+  const desde=new Date(); desde.setDate(desde.getDate()-10);
+  const hasta=new Date(desde); hasta.setMonth(hasta.getMonth()+1);
+  S={cfg:{tarifa:1.00,fraccion:60,reserva:5,radio:10,gracia:15,mensualidad:40.00},
+     spots, backupSpots:null, offset:0, seq:{sol:0,stay:0,sp:0},
+     entrada:{status:"libre",read:"—",plate:"—",stayId:null},
      stays:[], current:null,
-     alerts:[], log:[],
-     mensuales:[{placa:"PBX-7781",nombre:"Conductor mensual 1",correo:"mensual1@correo.com",verificada:true,vigencia:"01/11/2026 – 30/11/2026"}],
-     cuentas:[{u:"encargado01",n:"Carlos Ñato",e:"Habilitada"},{u:"encargado02",n:"Eduardo Mortensen",e:"Habilitada"}],
-     adminTab:"panel", selPay:null, tick:null};
+     phone:{view:"home",email:null,msg:null},
+     alerts:[], obs:[], log:[], inbox:[],
+     mensuales:[{placa:"PBX-7781",nombre:"Conductor mensual 1",correo:"mensual1@correo.test",verificada:true,code:null,
+                 mens:{valor:40,metodo:"Transferencia",desde:+desde,hasta:+hasta}}],
+     cuentas:[{u:"encargado01",n:"Carlos Ñato",c:"carlos@smartpark.test",p:"smartpark",e:"Habilitada"},
+              {u:"encargado02",n:"Eduardo Mortensen",c:"eduardo@smartpark.test",p:"smartpark",e:"Habilitada"}],
+     session:null, login:{err:null,pending:null},
+     adminTab:"panel", selPay:null, selMens:null, manual:{}, tick:null};
 }
-/* ===================== UTILIDADES ===================== */
-const now = () => Date.now() + S.offset;                 // reloj de la demostración (hora real + adelantos simulados)
-const fmtT = ms => new Date(ms).toLocaleTimeString("es-EC",{hour:"2-digit",minute:"2-digit",second:"2-digit",hour12:false});
-const fmtHM = ms => new Date(ms).toLocaleTimeString("es-EC",{hour:"2-digit",minute:"2-digit",hour12:false});
-const dur = ms => {const t=Math.max(0,Math.floor(ms/1000));const h=Math.floor(t/3600),m=Math.floor(t%3600/60),s=t%60;return `${h} h ${String(m).padStart(2,"0")} min ${String(s).padStart(2,"0")} s`;};
-const money = v => "USD "+v.toFixed(2).replace(".",",");
-const stay = id => S.stays.find(s=>s.id===id);
-const counts = () => {const c={D:0,R:0,O:0};Object.values(S.spots).forEach(v=>c[v]++);return c;};
-const color = st => ({D:"#C8E6C9",R:"#FFE08A",O:"#F4B4B0"})[st];
-function log(t){S.log.unshift(fmtHM(now())+" · "+t);}
-function toast(t){const e=document.getElementById("toast");e.textContent=t;e.classList.add("show");clearTimeout(toast._t);toast._t=setTimeout(()=>e.classList.remove("show"),2800);}
-function alertAdd(tipo,t,d,bg,fg){S.alerts.unshift({id:Date.now()+Math.random(),tipo,t,d,bg,fg});}
-const onView = v => document.getElementById("v-"+v).classList.contains("on");
 
-/* ===================== NAVEGACIÓN ===================== */
+/* ---------- Utilidades ---------- */
+const now=()=>Date.now()+S.offset;
+const fmtT=ms=>new Date(ms).toLocaleTimeString("es-EC",{hour:"2-digit",minute:"2-digit",second:"2-digit",hour12:false});
+const fmtHM=ms=>new Date(ms).toLocaleTimeString("es-EC",{hour:"2-digit",minute:"2-digit",hour12:false});
+const fmtD=ms=>new Date(ms).toLocaleDateString("es-EC",{day:"2-digit",month:"2-digit",year:"numeric"});
+const dur=ms=>{const t=Math.max(0,Math.floor(ms/1000));return `${Math.floor(t/3600)} h ${String(Math.floor(t%3600/60)).padStart(2,"0")} min ${String(t%60).padStart(2,"0")} s`;};
+const money=v=>"USD "+v.toFixed(2).replace(".",",");
+const stay=id=>S.stays.find(s=>s.id===id);
+const counts=()=>{const c={D:0,R:0,O:0};Object.values(S.spots).forEach(v=>c[v]++);return c;};
+const color=st=>({D:"#C8E6C9",R:"#FFE08A",O:"#F4B4B0"})[st];
+const ACTIVE=["Solicitud","En pausa","En reserva","Ocupado","Ubicación no confirmada"];
+const isActive=s=>ACTIVE.includes(s.estado);
+const esc=t=>String(t).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"})[c]);
+function log(t){S.log.unshift(fmtHM(now())+" · "+t);}
+function toast(t){const e=document.getElementById("toast");e.textContent=t;e.classList.add("show");clearTimeout(toast._t);toast._t=setTimeout(()=>e.classList.remove("show"),3000);}
+function alertAdd(a){S.alerts.unshift({id:"AL"+Date.now()+Math.floor(Math.random()*1000),...a});}
+const onView=v=>document.getElementById("v-"+v).classList.contains("on");
+function mensualDe(placa){return S.mensuales.find(m=>m.placa===placa&&m.verificada);}
+function mensVigente(placa,at){const m=mensualDe(placa);return !!(m&&m.mens&&m.mens.desde<=at&&at<m.mens.hasta);}
+
+/* ---------- Navegación ---------- */
 document.querySelectorAll(".tab").forEach(b=>b.onclick=()=>go(b.dataset.v));
 function go(v){
   document.querySelectorAll(".tab").forEach(b=>b.classList.toggle("on",b.dataset.v===v));
@@ -221,8 +245,8 @@ function go(v){
   window.scrollTo(0,0); render();
 }
 
-/* ===================== QR ===================== */
-function qrSVG(seedStr,size=240){
+/* ---------- QR ---------- */
+function qrSVG(seedStr,size=230){
   const n=25,cell=size/(n+2);let st=7;for(const ch of seedStr)st=(st*31+ch.charCodeAt(0))%2147483647;
   const rnd=()=>{st=(st*1103515245+12345)%2147483648;return st/2147483648;};
   const finder=(r,c)=>{for(const [R,C] of [[0,0],[0,n-7],[n-7,0]]){const a=r-R,b=c-C;if(a>=0&&a<7&&b>=0&&b<7)return(a===0||a===6||b===0||b===6||(a>=2&&a<=4&&b>=2&&b<=4))?1:0;}return -1;};
@@ -231,86 +255,125 @@ function qrSVG(seedStr,size=240){
   return r+"</svg>";
 }
 
-/* ===================== 1. ENTRADA ===================== */
-function plateYes(){ S.entrada.status="eligiendo"; log("Conductor confirmó la placa "+S.entrada.plate); render(); }
-function plateNo(){
-  S.entrada.status="verificando";
-  alertAdd("placa","Placa por corregir","El conductor pulsó «Esta no es mi placa». Lectura: "+S.entrada.read,"#FDE8E8","#9B2C2C");
-  log("Conductor pulsó «Esta no es mi placa» → alerta al encargado (RN-06)");
-  render(); toast("Se avisó al encargado. Vaya al Panel del administrador → Lectura y corrección.");
+/* =====================================================================
+   1. ENTRADA (PR-01 · P-12)
+   ===================================================================== */
+function newReading(plate){
+  const v=plate.trim().toUpperCase();
+  const prev=stay(S.entrada.stayId); // solicitud anterior sin escanear: se descarta
+  if(prev&&!prev.scanned&&(prev.estado==="Solicitud"||prev.estado==="En pausa")) S.stays=S.stays.filter(x=>x.id!==prev.id);
+  S.entrada={status:"libre",read:v,plate:v,stayId:null};
+  log(`Lectura de placa en la entrada: ${v} [simulado] (RF-01)`);
+  if(v.includes("?")){ // lectura fallida
+    S.entrada.status="verificando";
+    alertAdd({tipo:"placa",t:"Lectura de placa fallida",d:`La cámara leyó «${v}». Revise la imagen y corrija la placa (RF-02).`,bg:"#FDE8E8",fg:"#9B2C2C"});
+    return;
+  }
+  afterPlate();
 }
-function chooseBlock(b){
-  const e=S.entrada; e.dest=b;
-  const spot=NEAR[b].find(s=>S.spots[s]==="D");
-  const id="E-"+String(S.stays.length+1).padStart(3,"0");
-  const ref="SOL-"+String(S.stays.length+1).padStart(4,"0");
-  if(!spot){ e.status="lleno"; log("Parqueadero lleno · solicitud cerrada (RF-06)"); render(); return; }
-  S.spots[spot]="R";
-  const s={id,ref,placa:e.plate,dest:b,spot,asignado:spot,estado:"En reserva",ingreso:null,reservaFin:Date.now()+S.cfg.reserva*60000,
-           car:{...ENTRY},walker:null,ruta:false,pagoStop:null,pago:null};
-  S.stays.push(s); e.stayId=id; e.status="qr";
-  log(`${id} · ${s.placa} eligió ${b} → puesto ${spot} «En reserva» (RF-05, RF-15)`);
-  render();
+function afterPlate(){ // placa válida: comprobar duplicado y disponibilidad, generar QR (RF-03)
+  const e=S.entrada;
+  const dup=S.stays.find(s=>isActive(s)&&s.placa===e.plate&&s.id!==e.stayId);
+  if(dup){ e.status="rechazada";
+    alertAdd({tipo:"dup",t:`Ingreso rechazado · ${e.plate}`,d:`La placa ya tiene una estancia activa (${dup.id}). Revise el vehículo.`,bg:"#FDE8E8",fg:"#9B2C2C"});
+    log(`Ingreso rechazado: ${e.plate} ya tiene una estancia activa`); return; }
+  if(counts().D===0){ e.status="lleno";
+    alertAdd({tipo:"lleno",t:"Parqueadero lleno",d:`Se cerró la solicitud de ${e.plate}; la talanquera queda baja (RF-06).`,bg:"#FDE8E8",fg:"#9B2C2C"});
+    log(`Parqueadero lleno: solicitud de ${e.plate} cerrada (RF-06)`); return; }
+  let s=e.stayId&&stay(e.stayId);
+  if(!s){
+    S.seq.sol++; S.seq.stay++;
+    s={id:"E-"+String(S.seq.stay).padStart(3,"0"),ref:"SOL-"+String(S.seq.sol).padStart(4,"0"),placa:e.plate,sp:null,
+       mensual:mensVigente(e.plate,now()),dest:null,spot:null,estado:"Solicitud",scanned:false,ingreso:null,car:{...OUTSIDE},walker:null,ruta:false,zona:null,
+       pagoStop:null,pago:null};
+    S.stays.push(s); e.stayId=s.id;
+  } else { s.placa=e.plate; s.mensual=mensVigente(e.plate,now()); if(s.estado==="En pausa") s.estado="Solicitud"; }
+  e.status=s.scanned?"escaneado":"leida";
+  log(`${s.ref} · QR generado para ${s.placa}${s.mensual?" (conductor mensual, RF-22)":""} (RF-03)`);
+}
+function plateNo(){
+  const e=S.entrada, s=stay(e.stayId);
+  e.status="verificando"; if(s) s.estado="En pausa";
+  alertAdd({tipo:"placa",t:"Placa por corregir",d:`El conductor pulsó «Esta no es mi placa». Lectura: ${e.read}.`,bg:"#FDE8E8",fg:"#9B2C2C"});
+  log(`${s?s.ref+" · ":""}«Esta no es mi placa» → solicitud en espera y alerta al encargado (RF-02, RN-06)`);
+  render(); toast("Se avisó al encargado. Vaya al Panel del encargado → Registro y corrección de placas.");
 }
 function scanQR(){
   const s=stay(S.entrada.stayId); if(!s) return;
-  s.ingreso=now(); S.current=s.id;
-  log(`${s.id} · QR escaneado (RF-03) · talanquera de entrada abierta · ingreso ${fmtHM(s.ingreso)} [simulado] (RF-08)`);
-  S.entrada={read:"—",plate:"—",status:"libre",dest:null,stayId:null};
+  s.scanned=true; S.current=s.id; S.phone={view:"estancia",email:null,msg:null};
+  S.entrada.status="escaneado";
+  log(`${s.ref} · QR escaneado: sesión temporal abierta (RF-04)`);
   go("conductor");
 }
-function renderEntrada(){
-  const e=S.entrada, c=counts(), L=document.getElementById("ent-left");
-  document.getElementById("ent-disp").textContent="Puestos disponibles: "+c.D;
-  const askPlate=`
-    <div class="card" style="display:flex;flex-direction:column;gap:14px">
-      <div class="h2">¿Esta es su placa?</div><div class="plate">${e.plate}</div>
-      <div class="row"><button class="btn success" onclick="plateYes()">Sí, es mi placa</button><button class="btn secondary" onclick="plateNo()">Esta no es mi placa</button></div></div>`;
-  const cam=`<div class="cam"><div class="tag">● Cámara de entrada (lectura simulada)</div><div class="mini">${e.read}</div></div>`;
-  let html=`<div class="h1">Bienvenido a SmartPark</div>`;
-  if(e.status==="leida") html+=cam+askPlate;
-  else if(e.status==="verificando") html+=cam+`<div class="note" style="background:#FFF4D6;color:#7B5A12"><b>Estamos verificando su placa, espere un momento.</b><br>El encargado está revisando la imagen de la cámara.</div>`;
-  else if(e.status==="eligiendo") html+=`<div class="card" style="display:flex;flex-direction:column;gap:14px">
-      <div style="display:flex;align-items:center;gap:10px"><span class="pill" style="background:#E6F4EA;color:#2E7D32">✓ Placa ${e.plate}</span></div>
-      <div class="h2">¿A qué bloque se dirige?</div>
-      <div class="muted">Le asignaremos el puesto disponible más cercano a su destino.</div>
-      <div class="blocks">${BLOCKS.map(b=>`<button class="blk" onclick="chooseBlock('${b.n}')">${b.n}<small>${NEAR[b.n].filter(s=>S.spots[s]==="D").length} puestos cerca</small></button>`).join("")}</div></div>`;
-  else if(e.status==="qr"){ const s=stay(e.stayId); html+=`<div class="card" style="display:flex;flex-direction:column;gap:12px">
-      <div style="display:flex;gap:8px;flex-wrap:wrap"><span class="pill" style="background:#E6F4EA;color:#2E7D32">✓ Placa ${s.placa}</span><span class="pill" style="background:#EAF2FD;color:#1565C0">Destino: ${s.dest}</span></div>
-      <div class="h2">Su puesto asignado</div><div style="font-size:56px;font-weight:800;color:#1565C0">${s.spot}</div>
-      <div class="muted">Escanee el código QR para ver la ruta en su celular. Tiene ${S.cfg.reserva} minutos para confirmar su puesto.</div>
-      <button class="btn secondary" onclick="changeBlock()">Cambiar de bloque</button></div>`; }
-  else if(e.status==="lleno") html+=`<div class="note" style="background:#FDE8E8;color:#9B2C2C"><b>Parqueadero lleno.</b><br>No hay puestos disponibles. La solicitud se cerró (RF-06).</div><button class="btn secondary" onclick="S.entrada.status='eligiendo';render()">Volver</button>`;
-  else if(e.status==="libre") html+=`<div class="cam"><div class="tag" style="color:#CBD5E0">● Cámara de entrada · esperando vehículo</div><div class="mini" style="background:#4A5568;color:#CBD5E0">— — —</div></div>
-      <div class="note" style="background:#EDF2F7;color:#2D3748">Talanquera abierta. Esperando el siguiente vehículo.<br>Para simular otro ingreso: <b>Panel del administrador → Simulación de eventos → Leer placa en la entrada</b>.</div>`;
-  L.innerHTML=html;
-  // QR
-  const ok=e.status==="qr", lock=document.getElementById("qr-lock"), scan=document.getElementById("scan");
-  document.getElementById("qr").innerHTML=qrSVG((e.stayId||"x")+e.plate);
-  lock.style.display=ok?"none":"flex";
-  lock.textContent={leida:"Confirme primero su placa",verificando:"Esperando la corrección del encargado…",eligiendo:"Elija el bloque al que se dirige",lleno:"Sin puestos disponibles",libre:"Esperando vehículo"}[e.status]||"";
-  scan.disabled=!ok; scan.onclick=scanQR;
-  document.getElementById("qr-ref").textContent=ok?`Solicitud ${stay(e.stayId).ref}. El código no contiene la placa en texto plano.`:"El código abre la página de su estancia.";
-  const stp=["Confirme su placa","Elija el bloque de destino","Escanee el QR y siga la ruta"];
-  const cur={leida:0,verificando:0,eligiendo:1,qr:2,lleno:1,libre:3}[e.status];
-  document.getElementById("ent-steps").innerHTML=stp.map((t,i)=>`<div class="st ${i<cur?"done":i===cur?"on":""}"><div class="num">${i<cur?"✓":i+1}</div>${t}</div>`).join("");
+function simGate(){
+  const s=S.stays.find(x=>x.estado==="En reserva"&&!x.ingreso);
+  if(!s){ toast("La talanquera se levanta cuando el conductor ya tiene un puesto asignado."); return; }
+  s.ingreso=now();
+  log(`${s.id} · talanquera de entrada levantada [simulado] · ingreso ${fmtHM(s.ingreso)} (RF-08)`);
+  if(S.entrada.stayId===s.id) S.entrada={status:"libre",read:"—",plate:"—",stayId:null};
+  toast(`Ingreso registrado a las ${fmtHM(s.ingreso)}. El puesto sigue «En reserva» hasta la confirmación.`);
+  render();
 }
-function changeBlock(){const s=stay(S.entrada.stayId);S.spots[s.spot]="D";S.stays=S.stays.filter(x=>x.id!==s.id);S.entrada.status="eligiendo";S.entrada.stayId=null;log("Conductor cambió de bloque; "+s.spot+" vuelve a «Disponible»");render();}
+function renderEntrada(){
+  const e=S.entrada, c=counts(), s=stay(e.stayId);
+  document.getElementById("ent-disp").textContent="Puestos disponibles: "+c.D;
+  const L=document.getElementById("ent-left"), R=document.getElementById("ent-right");
+  const cam=(txt,tag,col)=>`<div class="cam"><div class="tag" style="color:${col||"#9AE6B4"}">● ${tag}</div><div class="mini" ${txt==="—"?'style="background:#4A5568;color:#CBD5E0"':""}>${esc(txt)}</div></div>`;
+  let l=`<div class="h1">Bienvenido a SmartPark</div>`, r="";
+  const qrCard=(show,lockTxt)=>`<div class="card qrbox"><div class="h2">Escanee el código QR con su celular</div>
+     <div class="qrwrap">${qrSVG((s?s.ref:"x")+e.plate)}${show?"":`<div class="qrlock">${lockTxt}</div>`}</div>
+     <div class="small">${show?`Solicitud ${s.ref}. El código no lleva la placa en texto plano.`:"El código abre la solicitud de ingreso en su celular."}</div>
+     <button class="btn primary" onclick="scanQR()" ${show?"":"disabled"}>Simular escaneo del QR con el celular</button></div>`;
+  if(e.status==="leida"){
+    l+=cam(e.read,"Cámara de entrada (lectura simulada)")+`<div class="card" style="display:flex;flex-direction:column;gap:14px">
+      <div class="h2">Placa leída</div><div class="plate">${esc(e.plate)}</div>
+      ${s&&s.mensual?`<div class="ok">Conductor mensual con mensualidad vigente (RF-22).</div>`:""}
+      <div class="muted">Si es su placa, escanee el QR con su celular. Si no lo es, avísenos.</div>
+      <button class="btn secondary" onclick="plateNo()">Esta no es mi placa</button></div>`;
+    r=qrCard(true);
+  } else if(e.status==="verificando"){
+    l+=cam(e.read,"Cámara de entrada · lectura en revisión","#FBD38D")+`<div class="note" style="background:#FFF4D6;color:#7B5A12"><b>Estamos verificando su placa, espere un momento.</b><br>El encargado revisa la imagen de la cámara. Mientras tanto no corre ningún tiempo de reserva (RN-06).</div>`;
+    r=qrCard(false,"Esperando la corrección del encargado…");
+  } else if(e.status==="lleno"){
+    l+=cam(e.read,"Cámara de entrada (lectura simulada)")+`<div class="note" style="background:#FDE8E8;color:#9B2C2C"><b>Parqueadero lleno.</b><br>No hay puestos disponibles. La solicitud se cerró y la talanquera queda baja (RF-06).</div>`;
+    r=qrCard(false,"Sin puestos disponibles");
+  } else if(e.status==="rechazada"){
+    l+=cam(e.read,"Cámara de entrada (lectura simulada)")+`<div class="note" style="background:#FDE8E8;color:#9B2C2C"><b>Ingreso no permitido.</b><br>Esta placa ya tiene una estancia activa. El encargado revisará el vehículo.</div>`;
+    r=qrCard(false,"Ingreso rechazado");
+  } else if(e.status==="escaneado"){
+    const st=s;
+    l+=cam(e.read,"Cámara de entrada (lectura simulada)")+`<div class="card" style="display:flex;flex-direction:column;gap:12px">
+      <div class="sec"><span class="pill" style="background:#E6F4EA;color:#2E7D32">✓ QR escaneado</span><span class="pill" style="background:#EAF2FD;color:#1565C0">Placa ${esc(st.placa)}</span></div>
+      <div class="h2">Siga las indicaciones en su celular</div>
+      <div class="muted">${st.estado==="En reserva"?`Puesto asignado: <b>${st.spot}</b>. Avance hasta la talanquera.`:"Elija su destino en el celular para recibir su puesto."}</div></div>`;
+    r=`<div class="card" style="display:flex;flex-direction:column;gap:12px"><div class="h2">Talanquera de entrada</div>
+       <div class="gate" style="${st.estado==="En reserva"?"background:#E6F4EA;color:#22543D":"background:#EDF2F7;color:#4A5568"}">${st.estado==="En reserva"?"Lista para levantarse":"Baja: esperando la asignación del puesto"}</div>
+       <button class="btn sim" onclick="simGate()" ${st.estado==="En reserva"?"":"disabled"}>Simular: el vehículo pasa y se levanta la talanquera</button>
+       <div class="small">Evento simulado (RF-20). Al levantarse se guardan la placa y la hora de ingreso (RF-08). Si no ingresa dentro del tiempo de reserva, la reserva se cancela (RN-05).</div></div>`;
+  } else { // libre
+    l+=cam("—","Cámara de entrada · esperando vehículo","#CBD5E0")+`<div class="note" style="background:#EDF2F7;color:#2D3748">Esperando el siguiente vehículo.<br>Para simular otro ingreso use el <b>Panel del encargado → Simulación de eventos → Leer placa en la entrada</b>, o el botón de abajo.</div>
+      <button class="btn sim" onclick="newReading('PCQ-5521');render()">Simular: llega un vehículo con placa PCQ-5521</button>`;
+    r=qrCard(false,"Esperando vehículo");
+  }
+  L.innerHTML=l; R.innerHTML=r;
+}
 
-/* ===================== 2. CONDUCTOR ===================== */
-const center = n => {const m=MAPSPOTS.find(s=>s.n===n);return m?{x:m.x+24.5,y:m.y+29}:null;};
-const meta = n => MAPSPOTS.find(s=>s.n===n);
-function pathToSpot(from,n){ // ruta por carriles: desde un punto hasta la puerta del puesto
-  const m=meta(n), c=center(n); if(!m) return [];
-  const laneFrom = LANES.reduce((a,b)=>Math.abs(b-from.y)<Math.abs(a-from.y)?b:a);
+/* =====================================================================
+   2. CONDUCTOR (PR-01 a PR-03, PR-05 · P-00, P-01, P-02, P-03, P-07, P-08, P-13)
+   ===================================================================== */
+const center=n=>{const m=MAPSPOTS.find(s=>s.n===n);return m?{x:m.x+24.5,y:m.y+29}:null;};
+const meta=n=>MAPSPOTS.find(s=>s.n===n);
+function pathToSpot(from,n){
+  const m=meta(n),c=center(n); if(!m) return [];
+  const laneFrom=LANES.reduce((a,b)=>Math.abs(b-from.y)<Math.abs(a-from.y)?b:a);
   const pts=[[from.x,from.y],[from.x,laneFrom]];
-  if(laneFrom!==m.row.lane){ pts.push([AISLE_X,laneFrom],[AISLE_X,m.row.lane]); }
+  if(laneFrom!==m.row.lane) pts.push([AISLE_X,laneFrom],[AISLE_X,m.row.lane]);
   pts.push([c.x,m.row.lane],[c.x,m.row.door]);
   return pts;
 }
 const poly=(pts,col,dash)=>`<polyline points="${pts.map(p=>p.join(",")).join(" ")}" fill="none" stroke="${col}" stroke-width="4" stroke-dasharray="${dash}" stroke-linecap="round" stroke-linejoin="round"/>`;
 function mobileMap(s){
-  let r=`<svg width="350" height="470" viewBox="0 0 350 470" style="display:block;max-width:100%"><rect width="350" height="470" rx="14" fill="#E9EEF4"/>`;
+  let r=`<svg width="350" height="500" viewBox="0 0 350 500" style="display:block;max-width:100%"><rect width="350" height="500" rx="14" fill="#E9EEF4"/>`;
   BLOCKS.forEach(b=>{const mine=s&&s.dest===b.n;r+=`<rect x="${b.x}" y="14" width="102" height="50" rx="9" fill="${mine?"#B9D3EE":"#CFDDEB"}" ${mine?'stroke="#1565C0" stroke-width="2"':""}/><text x="${b.x+51}" y="44" text-anchor="middle" font-size="13" font-weight="700" fill="#1F3A5A">${b.n}</text>`;});
   LANES.forEach(y=>r+=`<rect x="14" y="${y-15}" width="322" height="30" fill="#DCE3EA"/>`);
   r+=`<rect x="0" y="148" width="14" height="238" fill="#DCE3EA"/>`;
@@ -318,106 +381,253 @@ function mobileMap(s){
     r+=`<rect x="${m.x}" y="${m.y}" width="49" height="58" rx="6" fill="${f}" stroke="#fff" stroke-width="2"/><text x="${m.x+24.5}" y="${m.y+33}" text-anchor="middle" font-size="12" font-weight="700" fill="${mine?"#fff":"#2D3748"}">${m.n}</text>`;});
   r+=`<rect x="200" y="398" width="136" height="40" rx="9" fill="#FBE3C4"/><text x="268" y="423" text-anchor="middle" font-size="13" font-weight="700" fill="#7A4B12">Vestíbulo</text>`;
   r+=`<rect x="14" y="398" width="96" height="36" rx="8" fill="#0F2A4A"/><text x="62" y="421" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">Entrada</text>`;
+  r+=`<line x1="20" y1="442" x2="104" y2="442" stroke="${s&&s.ingreso?"#2E7D32":"#C62828"}" stroke-width="4" stroke-linecap="round"/>`;
   if(s){
-    if(s.estado==="En reserva"){ r+=poly(pathToSpot(ENTRY,s.spot),"#1565C0","9 6"); const c=center(s.spot);
+    if(s.estado==="En reserva"&&s.spot){ r+=poly(pathToSpot(s.car,s.spot),"#1565C0","9 6"); const c=center(s.spot);
       r+=`<circle cx="${c.x}" cy="${c.y}" r="${S.cfg.radio*PX_PER_M}" fill="#1565C0" fill-opacity=".10" stroke="#1565C0" stroke-dasharray="4 4"/>`; }
-    if(s.estado==="Ocupado" && s.walker && s.ruta){ r+=poly(pathToSpot(s.walker,s.spot),"#2E7D32","3 7"); const c=center(s.spot);
+    if(s.estado==="Ocupado"&&s.walker&&s.ruta){ r+=poly(pathToSpot(s.walker,s.spot),"#2E7D32","3 7"); const c=center(s.spot);
       r+=`<circle cx="${c.x}" cy="${c.y}" r="${S.cfg.radio*PX_PER_M}" fill="#2E7D32" fill-opacity=".08" stroke="#2E7D32" stroke-dasharray="4 4"/>`; }
-    const car=s.car; r+=`<g><rect x="${car.x-17}" y="${car.y-10}" width="34" height="20" rx="5" fill="#E53E3E" stroke="#fff" stroke-width="2"/><text x="${car.x}" y="${car.y+4}" text-anchor="middle" font-size="9" font-weight="800" fill="#fff">AUTO</text></g>`;
-    if(s.walker){ r+=`<circle cx="${s.walker.x}" cy="${s.walker.y}" r="9" fill="#F6AD55" stroke="#fff" stroke-width="3"/><circle cx="${s.walker.x}" cy="${s.walker.y}" r="14" fill="none" stroke="#F6AD55" stroke-opacity=".5" stroke-width="2"/>`; }
+    if(["En reserva","Ocupado","Ubicación no confirmada"].includes(s.estado)){ const car=s.car;
+      r+=`<g><rect x="${car.x-17}" y="${car.y-10}" width="34" height="20" rx="5" fill="#E53E3E" stroke="#fff" stroke-width="2"/><text x="${car.x}" y="${car.y+4}" text-anchor="middle" font-size="9" font-weight="800" fill="#fff">AUTO</text></g>`; }
+    if(s.walker) r+=`<circle cx="${s.walker.x}" cy="${s.walker.y}" r="9" fill="#F6AD55" stroke="#fff" stroke-width="3"/><circle cx="${s.walker.x}" cy="${s.walker.y}" r="14" fill="none" stroke="#F6AD55" stroke-opacity=".5" stroke-width="2"/>`;
   }
-  [["#C8E6C9","Disponible"],["#FFE08A","Reserva"],["#F4B4B0","Ocupado"],["#1565C0","Su puesto"]].forEach(([c,t],i)=>{const x=14+i*84;r+=`<rect x="${x}" y="450" width="12" height="12" rx="3" fill="${c}"/><text x="${x+17}" y="460" font-size="11" fill="#2D3748">${t}</text>`;});
+  [["#C8E6C9","Disponible"],["#FFE08A","Reserva"],["#F4B4B0","Ocupado"],["#1565C0","Su puesto"]].forEach(([c,t],i)=>{const x=14+i*84;r+=`<rect x="${x}" y="480" width="12" height="12" rx="3" fill="${c}"/><text x="${x+17}" y="490" font-size="11" fill="#2D3748">${t}</text>`;});
   return r+"</svg>";
 }
 function nearestSpot(p){let best=null,bd=1e9;MAPSPOTS.forEach(m=>{const c=center(m.n);const d=Math.hypot(p.x-c.x,p.y-c.y);if(d<bd){bd=d;best=m.n;}});return {n:best,d:bd/PX_PER_M};}
+function phoneHome(){S.phone.view="home";S.phone.msg=null;S.phone.err=null;renderConductor();}
+function phoneGo(v){S.phone.view=v;S.phone.msg=null;S.phone.err=null;renderConductor();}
+function chooseBlock(b){
+  const s=stay(S.current); if(!s||s.estado!=="Solicitud") return;
+  s.dest=b;
+  const spot=NEAR[b].find(x=>S.spots[x]==="D");
+  if(!spot){ s.estado="Cerrada (lleno)"; S.entrada={status:"libre",read:"—",plate:"—",stayId:null};
+    log(`${s.ref} · sin puestos disponibles: «Parqueadero lleno», solicitud cerrada (RF-06)`); renderConductor(); return; }
+  S.spots[spot]="R"; s.spot=spot; s.asignado=spot; s.estado="En reserva"; s.reservaFin=Date.now()+S.cfg.reserva*60000; s.asignadaEn=now();
+  log(`${s.id} · destino ${b} (RF-15) → puesto ${spot} «En reserva» (RF-05)`);
+  render();
+}
+function phoneNotMine(){ // desde P-01 (RF-02)
+  const s=stay(S.current); s.estado="En pausa"; S.entrada.stayId=s.id; S.entrada.read=s.placa; S.entrada.plate=s.placa; S.entrada.status="verificando";
+  alertAdd({tipo:"placa",t:"Placa por corregir",d:`En su celular (P-01) el conductor pulsó «Esta no es mi placa». Lectura: ${s.placa}.`,bg:"#FDE8E8",fg:"#9B2C2C"});
+  log(`${s.ref} · «Esta no es mi placa» en P-01 → solicitud en pausa sin asignar puesto (RF-02)`);
+  render();
+}
 function move(dx,dy){
   const s=stay(S.current); if(!s) return;
   let o=null;
-  if(s.estado==="En reserva") o=s.car; else if(s.estado==="Ocupado" && s.walker) o=s.walker; else return;
-  o.x=Math.min(340,Math.max(6,o.x+dx)); o.y=Math.min(440,Math.max(70,o.y+dy));
+  if(s.estado==="En reserva"&&s.ingreso) o=s.car; else if(s.estado==="Ocupado"&&s.walker) o=s.walker; else return;
+  o.x=Math.min(340,Math.max(6,o.x+dx)); o.y=Math.min(470,Math.max(30,o.y+dy));
   renderConductor(true);
 }
-document.addEventListener("keydown",e=>{ if(!onView("conductor")) return;
+document.addEventListener("keydown",e=>{ if(!onView("conductor")) return; if(["INPUT","TEXTAREA","SELECT"].includes(document.activeElement.tagName)) return;
   const k={ArrowUp:[0,-8],ArrowDown:[0,8],ArrowLeft:[-8,0],ArrowRight:[8,0]}[e.key]; if(k){e.preventDefault();move(...k);} });
 function confirmSpot(){
   const s=stay(S.current); const ns=nearestSpot(s.car);
   if(ns.d>S.cfg.radio) return;
-  if(ns.n!==s.spot){ if(S.spots[ns.n]!=="D") return; S.spots[s.spot]="D"; log(`${s.id} · se estacionó en ${ns.n} en lugar de ${s.spot} (RF-18)`); s.spot=ns.n; }
+  if(ns.n!==s.spot){ if(S.spots[ns.n]!=="D"){ alertAdd({tipo:"rech",t:`Confirmación rechazada · ${ns.n} · ${s.placa}`,d:`El conductor intentó confirmar ${ns.n}, que no está disponible (RF-18).`,bg:"#FDE8E8",fg:"#9B2C2C",ref:s.id}); toast("Ese puesto no está disponible. Se avisó al encargado."); render(); return; }
+    S.spots[s.spot]="D"; log(`${s.id} · se estacionó en ${ns.n} en lugar de ${s.spot} (RF-18)`); s.spot=ns.n; }
   S.spots[s.spot]="O"; s.estado="Ocupado"; s.confirmada=now();
   const c=center(s.spot); s.car={x:c.x,y:c.y};
   log(`${s.id} · «Estacioné aquí» → ${s.spot} «Ocupado» (RF-16)`);
-  toast("Puesto confirmado: "+s.spot+" quedó «Ocupado»."); render();
+  S.phone.msg={t:"Puesto confirmado",d:`${s.spot} quedó «Ocupado». ¡Buen día! (RF-16)`,bg:"#E6F4EA",fg:"#2E7D32"};
+  render();
 }
-function getOut(){ const s=stay(S.current); const m=meta(s.spot); s.walker={x:center(s.spot).x+44,y:m.row.lane}; s.ruta=false;
-  log(`${s.id} · conductor bajó del vehículo en ${s.spot}`); renderConductor(); }
-function goBack(){ const s=stay(S.current); s.ruta=true; log(`${s.id} · consultó la ruta de regreso a ${s.spot} (RF-14)`); renderConductor(); }
-function getIn(){ const s=stay(S.current); s.walker=null; s.ruta=false; toast("Llegó a su vehículo en "+s.spot+"."); renderConductor(); }
+function getOut(){const s=stay(S.current);const m=meta(s.spot);s.walker={x:center(s.spot).x+44,y:m.row.lane};s.ruta=false;s.zona=null;log(`${s.id} · el conductor bajó del vehículo`);renderConductor();}
+function setZone(z){const s=stay(S.current);s.zona=z;s.walker={...ZONES[z]};s.ruta=false;renderConductor();}
+function goBack(){const s=stay(S.current);s.ruta=true;log(`${s.id} · ruta peatonal de regreso${s.zona?" desde "+s.zona:""} a ${s.spot} (RF-14)`);renderConductor();}
+function getIn(){const s=stay(S.current);s.walker=null;s.ruta=false;s.zona=null;toast("Llegó a su vehículo en "+s.spot+".");renderConductor();}
 function sendObs(){
   const s=stay(S.current); const tipo=document.getElementById("c-tipo").value; const txt=document.getElementById("c-txt").value.trim();
   if(!txt){toast("Escriba una observación.");return;}
-  alertAdd("obs",`Observación · ${s.spot} · ${s.placa}`,`${tipo}: «${txt}»`,"#EDF2F7","#2D3748");
-  log(`${s.id} · observación enviada: ${tipo} (RF-23)`);
-  if(tipo==="Puesto ocupado por otro vehículo" && s.estado==="En reserva"){ // RN-03
+  if(txt.length>300){toast("Máximo 300 caracteres.");return;}
+  const o={id:"N-"+String(S.obs.length+1).padStart(3,"0"),stayId:s.id,spot:s.spot,placa:s.placa,tipo,txt,estado:"pendiente",sol:null};
+  S.obs.unshift(o);
+  log(`${s.id} · novedad ${o.id}: ${tipo} (RF-23)`);
+  if(tipo==="Puesto ocupado por otro vehículo"&&s.estado==="En reserva"){ // RN-03
     const nxt=NEAR[s.dest].find(x=>S.spots[x]==="D"&&x!==s.spot);
-    if(nxt){S.spots[s.spot]="O";S.spots[nxt]="R";log(`${s.id} · RN-03: reasignado de ${s.spot} a ${nxt}`);s.spot=nxt;toast("Se le asignó un nuevo puesto: "+nxt);}
-  } else if(tipo==="No se pudo validar la ubicación" && s.estado==="En reserva"){ s.bloqueada=true; toast("El encargado verificará su puesto (RN-04)."); }
-  else toast("Observación enviada al encargado.");
+    if(nxt){S.spots[s.spot]="O";S.spots[nxt]="R";log(`${s.id} · RN-03: reasignado de ${s.spot} a ${nxt}`);o.txt+=` (reasignado de ${s.spot} a ${nxt})`;s.spot=nxt;toast("Se le asignó un nuevo puesto: "+nxt);}
+  } else if(tipo==="No se pudo validar la ubicación"&&s.estado==="En reserva"){ s.bloqueada=true; toast("Su puesto se mantiene reservado; el encargado se acercará a verificarlo (RN-04).");}
+  else toast("Novedad enviada al encargado.");
   render();
 }
+function tryForeign(){const s=stay(S.current), o=S.stays.find(x=>x.id!==S.current);
+  S.phone.ajeno=o?o.ref:"SOL-0999"; S.phone.view="ajeno";
+  log(`Intento de abrir la estancia ${S.phone.ajeno} con el acceso de ${s.ref}: bloqueado (RNF-04, CP-06)`); renderConductor();}
+/* --- Conductor mensual: P-00 inicio de sesión y P-08 verificación (RF-19) --- */
+function newCode(m){const v=String(Math.floor(100000+Math.random()*900000));m.code={v,exp:now()+10*60000,used:false};
+  S.inbox.unshift({to:m.correo,at:now(),subject:"SmartPark · Código de verificación",body:`Su código es ${v}. Vence en 10 minutos.`,code:v});
+  log(`Código de un solo uso enviado a ${m.correo} [correo simulado] (RF-19)`);}
+function loginMensual(){
+  const c=document.getElementById("m-mail").value.trim().toLowerCase();
+  const m=S.mensuales.find(x=>x.correo.toLowerCase()===c);
+  if(!m){S.phone.err="No hay una cuenta mensual con ese correo. Pida al encargado que lo registre (RF-13).";renderConductor();return;}
+  S.phone.email=m.correo; S.phone.err=null; S.phone.view=m.verificada?"cuenta":"verificar"; renderConductor();
+}
+function verifyCode(){
+  const m=S.mensuales.find(x=>x.correo===S.phone.email); const v=document.getElementById("m-code").value.trim();
+  if(!m.code||m.code.used){S.phone.err="No hay un código vigente. Solicite uno nuevo.";}
+  else if(now()>m.code.exp){S.phone.err="El código venció (10 minutos). Solicite uno nuevo.";log(`Código vencido rechazado para ${m.correo} (CP-12)`);}
+  else if(v!==m.code.v){S.phone.err="Código incorrecto. Revise el correo e inténtelo de nuevo.";log(`Código incorrecto rechazado para ${m.correo} (CP-12)`);}
+  else{m.code.used=true;m.verificada=true;S.phone.err=null;S.phone.view="cuenta";log(`Cuenta de ${m.placa} verificada (RF-19)`);toast("Cuenta verificada.");}
+  render();
+}
+function resendCode(){const m=S.mensuales.find(x=>x.correo===S.phone.email);newCode(m);S.phone.err=null;toast("Se envió un código nuevo a su correo (bandeja de prueba).");render();}
+
 function renderConductor(onlyMap){
-  const body=document.getElementById("c-body"), timer=document.getElementById("c-timer"), s=stay(S.current);
-  const help=document.getElementById("help-conductor");
-  if(!s){ timer.style.display="none"; document.getElementById("c-ref").textContent="—"; help.innerHTML="Página web que el conductor abre en su celular al escanear el QR.";
-    body.innerHTML=`<div class="empty"><div class="h2">Aún no hay una estancia abierta</div><div class="muted">En la pantalla de la entrada confirme la placa, elija el bloque y simule el escaneo del QR.</div><button class="btn primary" onclick="go('entrada')">Ir a la pantalla de la entrada</button></div>`; return; }
-  document.getElementById("c-ref").textContent=s.ref;
+  const body=document.getElementById("c-body"), timer=document.getElementById("c-timer"), url=document.getElementById("c-url"), help=document.getElementById("help-conductor");
+  const s=stay(S.current), v=S.phone.view;
+  const helpBtns=`<button class="hb" onclick="phoneHome()">Abrir la pantalla principal (P-00)</button>${s?`<button class="hb" onclick="phoneGo('estancia')">Volver a mi estancia</button>`:""}${s&&isActive(s)?`<button class="hb" onclick="tryForeign()">Probar el enlace de otra estancia (CP-06)</button>`:""}`;
+  timer.style.display="none";
+  const msgCard=m=>m?`<div class="msg" style="background:${m.bg}"><div class="sec"><span class="code">P-13</span><b style="color:${m.fg}">${m.t}</b></div><div class="small" style="color:#2D3748">${m.d}</div></div>`:"";
+  // ---------- P-00 pantalla principal
+  if(v==="home"){
+    url.textContent="🔒 smartpark.app";
+    help.innerHTML=`<span><span class="code">P-00</span> Pantalla principal e inicio de sesión. El conductor ocasional entra con el QR de la entrada, sin cuenta (RF-03). El conductor mensual inicia sesión con su correo.</span>${helpBtns}`;
+    body.innerHTML=`<div class="sec"><span class="code">P-00</span><span class="small">Pantalla principal</span></div>
+      <div class="h1" style="font-size:22px">Encuentre su puesto más cercano</div>
+      ${s&&isActive(s)?`<div class="card" style="padding:14px;display:flex;flex-direction:column;gap:8px"><div class="small">Solicitud ${s.ref} · placa ${esc(s.placa)}</div><button class="btn primary" onclick="phoneGo('estancia')">Ver mi estancia</button></div>`
+        :`<div class="card" style="padding:14px"><div class="muted">Para ingresar, escanee el QR que aparece en la pantalla de la entrada.</div><button class="btn secondary" style="margin-top:10px" onclick="go('entrada')">Ir a la pantalla de la entrada</button></div>`}
+      <div class="card" style="padding:14px;display:flex;flex-direction:column;gap:10px">
+        <div class="h2" style="font-size:16px">¿Es conductor mensual?</div>
+        <div><label class="label">Correo registrado</label><input class="input" id="m-mail" value="mensual1@correo.test"></div>
+        ${S.phone.err?`<div class="err">${S.phone.err}</div>`:""}
+        <button class="btn secondary" onclick="loginMensual()">Iniciar sesión</button>
+        <div class="small">Las cuentas mensuales las registra el encargado (RF-13) y se verifican con un código enviado al correo (RF-19).</div></div>`;
+    return;
+  }
+  // ---------- P-08 verificación de cuenta
+  if(v==="verificar"){
+    const m=S.mensuales.find(x=>x.correo===S.phone.email);
+    url.textContent="🔒 smartpark.app/cuenta/verificar";
+    help.innerHTML=`<span><span class="code">P-08</span> Verificación de cuenta del conductor mensual. El código de un solo uso vence en 10 minutos (RF-19). La «bandeja de prueba» simula el correo.</span>${helpBtns}`;
+    const last=S.inbox.find(x=>x.to===m.correo);
+    const left=m.code&&!m.code.used?Math.max(0,m.code.exp-now()):0;
+    body.innerHTML=`<div class="sec"><span class="code">P-08</span><span class="small">Verificación de cuenta</span></div>
+      <div class="h1" style="font-size:22px">Verifique su cuenta</div>
+      <div class="muted">Enviamos un código de un solo uso a <b>${esc(m.correo)}</b>.</div>
+      <div><label class="label">Código de verificación</label><input class="input" id="m-code" inputmode="numeric" maxlength="6" placeholder="6 dígitos" style="font-size:20px;letter-spacing:6px;text-align:center"></div>
+      <div class="small live" id="code-left">${m.code&&!m.code.used?(left>0?"Vence en "+Math.floor(left/60000)+":"+String(Math.floor(left/1000)%60).padStart(2,"0"):"El código venció."):"No hay un código vigente."}</div>
+      ${S.phone.err?`<div class="err">${S.phone.err}</div>`:""}
+      <button class="btn primary" onclick="verifyCode()">Verificar cuenta</button>
+      <button class="btn secondary" onclick="resendCode()">Solicitar un código nuevo</button>
+      <div class="inbox"><b>📨 Bandeja de prueba (correo simulado)</b>${last?`<div class="small">Para: ${esc(last.to)} · ${fmtHM(last.at)}</div><div>${esc(last.subject)}</div><div class="codebig">${last.code}</div>`:`<div class="small">Sin mensajes.</div>`}</div>`;
+    return;
+  }
+  // ---------- cuenta mensual verificada
+  if(v==="cuenta"){
+    const m=S.mensuales.find(x=>x.correo===S.phone.email);
+    url.textContent="🔒 smartpark.app/cuenta";
+    help.innerHTML=`<span><span class="code">P-00</span> Sesión del conductor mensual. Con mensualidad vigente, entra y sale sin pagar cada estancia; su placa se reconoce en la entrada y la salida (RF-22).</span>${helpBtns}`;
+    const vig=m.mens&&m.mens.desde<=now()&&now()<m.mens.hasta;
+    body.innerHTML=`<div class="sec"><span class="code">P-00</span><span class="small">Mi cuenta</span></div>
+      <div class="h1" style="font-size:22px">${esc(m.nombre)}</div>
+      <div class="ok">✓ Cuenta verificada (RF-19)</div>
+      <div class="card" style="padding:14px;display:flex;flex-direction:column;gap:6px"><div class="kv"><span>Placa</span><b>${esc(m.placa)}</b></div>
+        <div class="kv"><span>Mensualidad</span><b>${m.mens?(vig?"Vigente":"Vencida"):"Sin registrar"}</b></div>
+        ${m.mens?`<div class="kv"><span>Vigencia</span><b>${fmtD(m.mens.desde)} – ${fmtD(m.mens.hasta)}</b></div>`:""}</div>
+      <div class="muted">${m.mens?(vig?"Puede ingresar y salir sin pagar cada estancia mientras la mensualidad esté vigente.":"Su mensualidad venció: las estancias se cobran como ocasionales (RN-11)."):"Acérquese al encargado para registrar su mensualidad (RF-21)."}</div>
+      <button class="btn secondary" onclick="S.phone.email=null;phoneHome()">Cerrar sesión</button>`;
+    return;
+  }
+  // ---------- intento de abrir una estancia ajena (RF-04, RNF-04)
+  if(v==="ajeno"){
+    url.textContent="🔒 smartpark.app/estancia/"+S.phone.ajeno;
+    help.innerHTML=`<span>CP-06: con el acceso de un QR solo se ven los datos de la propia estancia; cualquier otro enlace se bloquea (RF-04, RNF-04).</span>${helpBtns}`;
+    body.innerHTML=`<div class="empty"><div class="msg" style="background:#FDE8E8"><div class="sec"><span class="code">P-13</span><b style="color:#C62828">Acceso denegado</b></div><div class="small" style="color:#2D3748">Este enlace no corresponde a su estancia. Solo puede consultar los datos de su propia estancia (RNF-04).</div></div><button class="btn primary" onclick="phoneGo('estancia')">Volver a mi estancia</button></div>`;
+    return;
+  }
+  // ---------- estancia abierta con el QR
+  if(!s){ S.phone.view="home"; return renderConductor(); }
+  url.textContent="🔒 smartpark.app/estancia/"+s.ref;
   const res=s.estado==="En reserva", ocu=s.estado==="Ocupado";
-  help.innerHTML = res ? `<b>Mueva el auto rojo con las flechas</b> (en pantalla o del teclado) hasta su puesto. «Estacioné aquí» se activa dentro del radio de ${S.cfg.radio} m.`
-     : ocu ? (s.walker ? `<b>Mueva la bolita naranja (usted, caminando)</b> con las flechas por el parqueadero. Cuando quiera volver, pulse «Regresar al carro» y siga la ruta verde.` : `Vehículo estacionado. Pulse <b>«Bajar del carro»</b> para simular que el conductor camina por el parqueadero.`) : "";
-  if(s.estado==="Cancelada"||s.estado==="Cerrada"){ timer.style.display="none";
-    const c=s.estado==="Cancelada"?["#FFF4D6","#B7791F","Reserva cancelada",`No confirmó a tiempo; el puesto volvió a «Disponible» (RN-05).`]:["#E6F4EA","#2E7D32","Estancia cerrada",`Salida autorizada a las ${fmtHM(s.salida)}. Este enlace ya no tiene acceso (RF-12). ¡Buen viaje!`];
-    body.innerHTML=`<div class="empty"><div class="card" style="background:${c[0]};border:none"><div class="h2" style="color:${c[1]}">${c[2]}</div><div class="muted">${c[3]}</div></div></div>`; return; }
+  if(s.estado==="En pausa"){
+    help.innerHTML=`<span>La solicitud está en pausa hasta que el encargado corrija la placa (RF-02). No se asigna puesto mientras tanto.</span>${helpBtns}`;
+    body.innerHTML=`<div class="empty"><div class="msg" style="background:#FFF4D6"><div class="sec"><span class="code">P-13</span><b style="color:#B7791F">Estamos verificando su placa</b></div><div class="small" style="color:#2D3748">Espere un momento; el encargado está revisando la imagen de la cámara.</div></div></div>`; return; }
+  if(s.estado==="Solicitud"){
+    if(!S.phone.p00seen){
+      help.innerHTML=`<span><span class="code">P-00</span> Al escanear el QR se abre la aplicación con la solicitud de ingreso (RF-03), sin crear una cuenta.</span>${helpBtns}`;
+      body.innerHTML=`<div class="sec"><span class="code">P-00</span><span class="small">Pantalla principal</span></div>
+        <div class="h1" style="font-size:22px">Encuentre su puesto más cercano</div>
+        <div class="card" style="padding:14px;display:flex;flex-direction:column;gap:8px"><div class="small">Solicitud de ingreso ${s.ref}</div><div class="plate" style="font-size:30px">${esc(s.placa)}</div>
+        ${s.mensual?`<div class="ok">Conductor mensual: su estancia no se cobra por fracción (RF-22).</div>`:""}</div>
+        <button class="btn primary" onclick="S.phone.p00seen=true;renderConductor()">Continuar</button>
+        <div class="small">El acceso es temporal: solo muestra su propia estancia y se revoca al salir (RF-04).</div>`;
+      return; }
+    help.innerHTML=`<span><span class="code">P-01</span> Selección del destino. El sistema asigna el puesto «Disponible» más cercano al bloque elegido (RF-05, RF-15).</span>${helpBtns}`;
+    body.innerHTML=`<div class="sec"><span class="code">P-01</span><span class="small">Selección del destino</span></div>
+      <div class="h1" style="font-size:22px">¿A qué bloque se dirige?</div>
+      <div class="card" style="padding:12px 14px;display:flex;align-items:center;gap:10px"><div class="small">Placa</div><b style="font-size:18px">${esc(s.placa)}</b><div class="spacer"></div><button class="lnk" onclick="phoneNotMine()">Esta no es mi placa</button></div>
+      <div class="blocks">${BLOCKS.map(b=>`<button class="blk" onclick="chooseBlock('${b.n}')">${b.n}<small>${NEAR[b.n].filter(x=>S.spots[x]==="D").length} libres cerca</small></button>`).join("")}</div>
+      <div class="muted">Le asignaremos el puesto disponible más cercano. Tendrá ${S.cfg.reserva} minutos para llegar y confirmarlo.</div>`;
+    return;
+  }
+  if(s.estado==="Cerrada (lleno)"){
+    help.innerHTML=`<span>No había puestos disponibles al asignar (RF-06).</span>${helpBtns}`;
+    body.innerHTML=`<div class="empty"><div class="msg" style="background:#FDE8E8"><div class="sec"><span class="code">P-13</span><b style="color:#C62828">Parqueadero lleno</b></div><div class="small" style="color:#2D3748">No hay puestos disponibles. La solicitud se cerró (RF-06).</div></div></div>`; return; }
+  if(s.estado==="Cancelada"){
+    help.innerHTML=`<span>El vehículo no ingresó dentro del tiempo de reserva (RN-05).</span>${helpBtns}`;
+    body.innerHTML=`<div class="empty"><div class="msg" style="background:#FFF4D6"><div class="sec"><span class="code">P-13</span><b style="color:#B7791F">Reserva cancelada</b></div><div class="small" style="color:#2D3748">No ingresó dentro del tiempo de reserva; el puesto volvió a «Disponible» (RN-05).</div></div></div>`; return; }
+  if(s.estado==="Cerrada"){
+    help.innerHTML=`<span>Estancia cerrada: el acceso del QR quedó revocado (RF-12).</span>${helpBtns}`;
+    body.innerHTML=`<div class="empty"><div class="msg" style="background:#E6F4EA"><div class="sec"><span class="code">P-13</span><b style="color:#2E7D32">Estancia cerrada</b></div><div class="small" style="color:#2D3748">Salida autorizada a las ${fmtHM(s.salida)}. Este enlace ya no tiene acceso (RF-12). ¡Buen viaje!</div></div></div>`; return; }
+  if(s.estado==="Ubicación no confirmada"){
+    help.innerHTML=`<span>No se confirmó la ocupación dentro del tiempo de reserva: el puesto volvió a «Disponible» y el encargado registrará el puesto real (RF-17, RN-01).</span>${helpBtns}`;
+    body.innerHTML=`<div class="msg" style="background:#FFF4D6"><div class="sec"><span class="code">P-13</span><b style="color:#B7791F">Ubicación no confirmada</b></div><div class="small" style="color:#2D3748">No confirmó su puesto a tiempo. El encargado se acercará a registrar dónde está su vehículo.</div></div><div id="c-map">${mobileMap(s)}</div>`; return; }
+  // En reserva / Ocupado
   if(res){ const left=Math.max(0,Math.round((s.reservaFin-Date.now())/1000)); timer.style.display=""; timer.style.background="#FFE08A"; timer.style.color="#6B4E00";
     timer.textContent=s.bloqueada?"En verificación":"Reserva "+Math.floor(left/60)+":"+String(left%60).padStart(2,"0"); }
   else { timer.style.display=""; timer.style.background="#C8E6C9"; timer.style.color="#22543D"; timer.textContent=s.walker?"Caminando":"Estacionado"; }
-  if(onlyMap && document.getElementById("c-map")){ document.getElementById("c-map").innerHTML=mobileMap(s); updRange(s); return; }
-  const pad=`<div class="pad"><span></span><button onclick="move(0,-8)">↑</button><span></span><button onclick="move(-8,0)">←</button><button onclick="move(0,8)">↓</button><button onclick="move(8,0)">→</button></div>`;
+  help.innerHTML=(res?(s.ingreso?`<span><span class="code">P-02</span> <span class="code">P-07</span> <b>Mueva el auto rojo con las flechas</b> (en pantalla o del teclado). «Estacioné aquí» se activa dentro del radio de ${S.cfg.radio} m (RF-16).</span>`
+      :`<span><span class="code">P-02</span> Puesto y recorrido de ingreso. Primero el vehículo pasa la talanquera (evento simulado); luego puede moverse por el mapa.</span>`)
+    :(s.walker?`<span><span class="code">P-03</span> <b>Mueva la bolita naranja</b> (usted, caminando) o elija dónde está. «Regresar al carro» dibuja la ruta peatonal (RF-14).</span>`
+      :`<span><span class="code">P-03</span> Vehículo estacionado. Pulse «Bajar del carro» para simular que el conductor camina por el establecimiento.</span>`))+helpBtns;
+  if(onlyMap&&document.getElementById("c-map")){document.getElementById("c-map").innerHTML=mobileMap(s);updRange(s);return;}
+  const pad=en=>`<div class="pad"><span></span><button onclick="move(0,-8)" ${en?"":"disabled"}>↑</button><span></span><button onclick="move(-8,0)" ${en?"":"disabled"}>←</button><button onclick="move(0,8)" ${en?"":"disabled"}>↓</button><button onclick="move(8,0)" ${en?"":"disabled"}>→</button></div>`;
   let mid="";
-  if(res) mid=`${pad}<div class="simnote">Simulación: el auto reemplaza la ubicación GPS del celular (RE-08).</div>
+  if(res&&!s.ingreso) mid=`<div class="range" style="background:#EDF2F7;color:#4A5568"><span class="dot" style="background:#C62828"></span>Talanquera baja: avance hasta la entrada</div>
+     <button class="btn sim" onclick="simGate()">Simular: pasar por la talanquera (RF-08)</button>
+     <div class="small">Si no ingresa dentro de ${S.cfg.reserva} minutos desde la asignación, la reserva se cancela (RN-05).</div>`;
+  else if(res) mid=`${pad(true)}<div class="small" style="text-align:center">Simulación: el auto reemplaza la ubicación GPS del celular (RE-08).</div>
+     <div class="sec"><span class="code">P-07</span><span class="small">Confirmación de ocupación</span></div>
      <div class="range" id="c-range"></div>
      <button class="btn primary" id="c-ok" onclick="confirmSpot()" style="padding:16px">Estacioné aquí</button>
-     <div class="muted" style="font-size:12px">El botón se activa solo dentro del radio del puesto. Si no confirma en ${S.cfg.reserva} minutos, el puesto vuelve a «Disponible».</div>`;
-  else if(!s.walker) mid=`<div class="range" style="background:#E6F4EA;color:#2E7D32"><span class="dot" style="background:#2E7D32"></span>Ocupación confirmada a las ${fmtHM(s.confirmada)}${s.pago?" · Pago confirmado":""}</div>
+     <div class="small">Solo se activa con la ubicación dentro del radio del puesto, precisión suficiente y el vehículo detenido. Sin confirmación en ${S.cfg.reserva} min el puesto vuelve a «Disponible» (RF-17).</div>`;
+  else if(!s.walker) mid=`${msgCard(S.phone.msg)}<div class="range" style="background:#E6F4EA;color:#2E7D32"><span class="dot" style="background:#2E7D32"></span>Ocupación confirmada a las ${fmtHM(s.confirmada)}${s.pago?" · pago confirmado":""}${s.mensual?" · mensual":""}</div>
      <button class="btn dark" onclick="getOut()" style="padding:15px">🚶 Bajar del carro</button>`;
-  else mid=`${pad}<div class="simnote">Simulación: la bolita naranja es usted caminando por el parqueadero.</div>
+  else mid=`${pad(true)}
+     <div><label class="label">¿Dónde está ahora? (zona de origen)</label><select class="input" onchange="if(this.value)setZone(this.value)"><option value="">Mover la bolita con las flechas…</option>${Object.keys(ZONES).map(z=>`<option ${s.zona===z?"selected":""}>${z}</option>`).join("")}</select></div>
      <div class="range" id="c-range"></div>
      ${s.ruta?"":`<button class="btn success" onclick="goBack()" style="padding:15px">Regresar al carro</button>`}
      <button class="btn primary" id="c-in" onclick="getIn()" style="padding:15px;display:none">Subir al carro</button>`;
+  const mine=S.obs.filter(o=>o.stayId===s.id);
   body.innerHTML=`
-   <div class="card" style="display:flex;align-items:center;gap:12px;padding:14px 16px">
-     <div><span class="label" style="margin-bottom:2px">Su puesto · ${s.placa} · ${s.dest}</span><div class="big">${s.spot}</div></div><div class="spacer"></div>
+   <div class="sec"><span class="code">${res?"P-02":"P-03"}</span><span class="small">${res?"Puesto y recorrido de ingreso":"Regreso al vehículo"}</span></div>
+   <div class="card" style="display:flex;align-items:center;gap:12px;padding:12px 16px">
+     <div><span class="label" style="margin-bottom:2px">Su puesto · ${esc(s.placa)} · ${s.dest}</span><div class="big">${s.spot}</div></div><div class="spacer"></div>
      <div class="pill" style="${res?"background:#FFF4D6;color:#B7791F":"background:#FDE8E8;color:#C62828"}">${s.estado}</div></div>
-   <div class="h2">${res?"Diríjase a su puesto":s.walker?(s.ruta?"Ruta de regreso a "+s.spot:"Usted está caminando"):"Su vehículo está en "+s.spot}</div>
    <div id="c-map">${mobileMap(s)}</div>
    ${mid}
-   <div class="card" style="display:flex;flex-direction:column;gap:11px;padding:16px">
-     <div class="h2">Observaciones</div>
+   <div class="card" style="display:flex;flex-direction:column;gap:10px;padding:14px">
+     <div class="h2" style="font-size:16px">Observaciones sobre su puesto</div>
      <div><label class="label">Tipo de novedad</label><select class="input" id="c-tipo" style="font-size:14px">
        <option>Puesto ocupado por otro vehículo</option><option>Puesto obstruido o dañado</option><option>Puesto mal asignado</option><option>No se pudo validar la ubicación</option><option>Otro</option></select></div>
-     <div><label class="label">Observación</label><textarea class="input" id="c-txt" placeholder="Escriba aquí lo que encontró en su puesto…"></textarea></div>
+     <div><label class="label">Observación (máx. 300 caracteres)</label><textarea class="input" id="c-txt" maxlength="300" placeholder="Escriba aquí lo que encontró en su puesto…"></textarea></div>
      <button class="btn secondary" onclick="sendObs()">Enviar observación</button>
+     ${mine.length?`<div class="small"><b>Mis novedades:</b> ${mine.map(o=>`${o.id} · ${o.tipo} · <b>${o.estado}</b>${o.sol?" — "+esc(o.sol):""}`).join("<br>")}</div>`:""}
    </div>`;
   updRange(s);
 }
 function updRange(s){
   const el=document.getElementById("c-range"); if(!el) return;
   if(s.estado==="En reserva"){
-    const ok=document.getElementById("c-ok"); const ns=nearestSpot(s.car);
-    const inR=ns.d<=S.cfg.radio && (ns.n===s.spot||S.spots[ns.n]==="D");
+    const ok=document.getElementById("c-ok"), ns=nearestSpot(s.car);
+    const inR=ns.d<=S.cfg.radio&&(ns.n===s.spot||S.spots[ns.n]==="D");
     const c=center(s.spot), d=Math.hypot(s.car.x-c.x,s.car.y-c.y)/PX_PER_M;
     const label=(ns.n===s.spot||!inR)?`Está a ${d.toFixed(0)} m de ${s.spot}`:`Está en ${ns.n} (distinto al asignado)`;
     el.style.background=inR?"#E6F4EA":"#EDF2F7"; el.style.color=inR?"#2E7D32":"#4A5568";
     el.innerHTML=`<span class="dot" style="background:${inR?"#2E7D32":"#A0AEC0"}"></span>${label} · ${inR?"dentro":"fuera"} del radio de ${S.cfg.radio} m`;
-    ok.disabled=!inR || s.bloqueada;
+    ok.disabled=!inR||s.bloqueada;
   } else if(s.walker){
     const c=center(s.spot), mm=meta(s.spot), d=Math.hypot(s.walker.x-c.x,s.walker.y-mm.row.door)/PX_PER_M, near=d<=S.cfg.radio;
     el.style.background=near?"#E6F4EA":"#EDF2F7"; el.style.color=near?"#2E7D32":"#4A5568";
@@ -426,162 +636,374 @@ function updRange(s){
   }
 }
 
-/* ===================== 3. ADMIN ===================== */
-const TABS=[["panel","Panel general"],["placas","Lectura y corrección de placas"],["pagos","Estancias y pagos"],["salidas","Salidas"],["mensuales","Conductores mensuales"],["cuentas","Cuentas de encargado"],["sim","Simulación de eventos"],["cfg","Configuración"]];
+/* =====================================================================
+   3. PANEL DEL ENCARGADO (P-04, P-05, P-06, P-09, P-10, P-11)
+   ===================================================================== */
+const TABS=[["panel","Panel general y alertas","P-09"],["placas","Registro y corrección de placas","P-04"],["pagos","Estancia y pago","P-05"],["salidas","Validación y cierre de salida","P-06"],
+            ["mensuales","Conductores mensuales","P-04"],["cuentas","Cuentas de encargado","P-11"],["sim","Simulación de eventos","P-09"],["cfg","Configuración","P-09"]];
 function adminTab(t){S.adminTab=t;renderAdmin();}
-function stateTag(e){const m={"En reserva":["#FFF4D6","#B7791F"],"Ocupado":["#FDE8E8","#C62828"],"Cerrada":["#E6F4EA","#2E7D32"],"Cancelada":["#EDF2F7","#4A5568"]}[e]||["#EDF2F7","#4A5568"];return `<span class="tag" style="background:${m[0]};color:${m[1]}">${e}</span>`;}
+function stateTag(e){const m={"Solicitud":["#EDF2F7","#4A5568"],"En pausa":["#FFF4D6","#B7791F"],"En reserva":["#FFF4D6","#B7791F"],"Ocupado":["#FDE8E8","#C62828"],"Ubicación no confirmada":["#FDE8E8","#9B2C2C"],"Cerrada":["#E6F4EA","#2E7D32"],"Cancelada":["#EDF2F7","#4A5568"],"Cerrada (lleno)":["#EDF2F7","#4A5568"]}[e]||["#EDF2F7","#4A5568"];return `<span class="tag" style="background:${m[0]};color:${m[1]}">${e}</span>`;}
 function bigMap(){
   let r=`<svg viewBox="0 0 760 470" style="width:100%;display:block"><rect width="760" height="470" rx="14" fill="#E9EEF4"/>`;
   [["Bloque A",30],["Bloque B",280],["Bloque C",530]].forEach(([t,x])=>r+=`<rect x="${x}" y="20" width="200" height="60" rx="10" fill="#CFDDEB"/><text x="${x+100}" y="56" text-anchor="middle" font-size="16" font-weight="700" fill="#1F3A5A">${t}</text>`);
   r+=`<rect x="30" y="190" width="700" height="26" fill="#DCE3EA"/><rect x="30" y="292" width="700" height="20" fill="#DCE3EA"/>`;
   [["A",110,k=>"A-"+String(k+1).padStart(2,"0")],["B",222,k=>"B-"+(k+10)],["C",318,k=>"C-"+String(k+1).padStart(2,"0")]].forEach(([L,y,nm])=>{
     for(let k=0;k<12;k++){const n=nm(k),x=30+k*58,st=S.spots[n];const occ=S.stays.find(s=>s.spot===n&&(s.estado==="Ocupado"||s.estado==="En reserva"));
-      r+=`<rect x="${x}" y="${y}" width="50" height="64" rx="6" fill="${color(st)}" stroke="${occ?"#1565C0":"#fff"}" stroke-width="${occ?3:2}"/><text x="${x+25}" y="${y+(occ?30:37)}" text-anchor="middle" font-size="12" font-weight="700" fill="#2D3748">${n}</text>${occ?`<text x="${x+25}" y="${y+46}" text-anchor="middle" font-size="8.5" font-weight="700" fill="#1565C0">${occ.placa}</text>`:""}`;}});
+      r+=`<rect x="${x}" y="${y}" width="50" height="64" rx="6" fill="${color(st)}" stroke="${occ?"#1565C0":"#fff"}" stroke-width="${occ?3:2}"/><text x="${x+25}" y="${y+(occ?30:37)}" text-anchor="middle" font-size="12" font-weight="700" fill="#2D3748">${n}</text>${occ?`<text x="${x+25}" y="${y+46}" text-anchor="middle" font-size="8.5" font-weight="700" fill="#1565C0">${esc(occ.placa)}</text>`:""}`;}});
   r+=`<rect x="30" y="410" width="120" height="40" rx="8" fill="#0F2A4A"/><text x="90" y="435" text-anchor="middle" font-size="14" font-weight="700" fill="#fff">Entrada</text>`;
   r+=`<rect x="560" y="400" width="170" height="54" rx="10" fill="#FBE3C4"/><text x="645" y="432" text-anchor="middle" font-size="15" font-weight="700" fill="#7A4B12">Vestíbulo</text>`;
   [["#C8E6C9","Disponible"],["#FFE08A","En reserva"],["#F4B4B0","Ocupado"]].forEach(([c,t],i)=>{const x=200+i*110;r+=`<rect x="${x}" y="422" width="14" height="14" rx="3" fill="${c}"/><text x="${x+20}" y="434" font-size="13" fill="#2D3748">${t}</text>`;});
   return r+"</svg>";
 }
-function calc(s,until){
-  const ms=until-s.ingreso; const min=ms/60000; const fr=Math.max(1,Math.ceil(min/S.cfg.fraccion));
-  const mens=S.mensuales.find(m=>m.placa===s.placa&&m.verificada);
-  return {ms,fr,total:mens?0:fr*S.cfg.tarifa,mens:!!mens};
+/* --- P-10 inicio de sesión (RNF-03, RF-24) --- */
+function adminLogin(){
+  const u=document.getElementById("l-user").value.trim(), p=document.getElementById("l-pass").value;
+  const c=S.cuentas.find(x=>x.u===u);
+  if(!c){S.login.err="Usuario o contraseña incorrectos.";log(`Intento de inicio de sesión rechazado (${u||"vacío"}) (RNF-03)`);}
+  else if(c.e==="Deshabilitada"){S.login.err="Esta cuenta está deshabilitada y no puede iniciar sesión (RF-24).";log(`Inicio de sesión rechazado: ${u} deshabilitada`);}
+  else if(c.e==="Pendiente de activación"){S.login.pending=u;S.login.err=null;}
+  else if(c.p!==p){S.login.err="Usuario o contraseña incorrectos.";log(`Intento de inicio de sesión rechazado (${u}) (RNF-03)`);}
+  else{S.session={u};S.login={err:null,pending:null};log(`${u} inició sesión (P-10)`);}
+  renderAdmin();
 }
+function definePass(){
+  const a=document.getElementById("l-p1").value, b=document.getElementById("l-p2").value;
+  if(a.length<6){S.login.err="La contraseña debe tener al menos 6 caracteres.";renderAdmin();return;}
+  if(a!==b){S.login.err="Las contraseñas no coinciden.";renderAdmin();return;}
+  const c=S.cuentas.find(x=>x.u===S.login.pending); c.p=a; c.e="Habilitada";
+  S.session={u:c.u}; log(`${c.u} definió su contraseña: cuenta «habilitada» (RF-24)`); S.login={err:null,pending:null}; renderAdmin();
+}
+function adminLogout(){log(`${S.session.u} cerró sesión`);S.session=null;renderAdmin();}
+function calc(s,until){
+  const mens=S.mensuales.find(m=>m.placa===s.placa&&m.verificada&&m.mens);
+  let start=s.ingreso, nota="";
+  if(s.mensual&&mens){ if(until<mens.mens.hasta) return {ms:until-s.ingreso,fr:0,total:0,mens:true,nota:"Mensualidad vigente: sin cobro (RF-22)"};
+    start=Math.max(s.ingreso,mens.mens.hasta); nota="Mensualidad vencida durante la estancia: se cobra solo el tiempo posterior (RN-11)"; }
+  const ms=until-start, fr=Math.max(1,Math.ceil(ms/60000/S.cfg.fraccion));
+  return {ms:until-s.ingreso,fr,total:fr*S.cfg.tarifa,mens:false,nota};
+}
+const paidOf=s=>(s.pagos||[]).reduce((a,p)=>a+p.total,0);
 function payPanel(){
-  const pend=S.stays.filter(s=>s.estado==="Ocupado"&&!s.pago);
+  const pend=S.stays.filter(s=>(s.estado==="Ocupado"||s.estado==="Ubicación no confirmada")&&s.ingreso&&!s.pago&&!(s.mensual&&calc(s,now()).mens));
   const sel=(S.selPay&&pend.find(s=>s.id===S.selPay))||pend[0];
-  if(!sel) return `<div class="h2">Cobro</div><div class="muted">No hay estancias con pago pendiente. Primero el conductor debe confirmar su puesto («Estacioné aquí»).</div>`;
+  if(!sel) return `<div class="h2">Cobro</div><div class="muted">No hay estancias con pago pendiente. El cobro se hace cuando el vehículo ya ingresó (los conductores con mensualidad vigente no pagan por estancia).</div>`;
   S.selPay=sel.id;
-  const stopped=!!sel.pagoStop, until=stopped?sel.pagoStop:now(), k=calc(sel,until);
-  return `<div class="h2">Estancia ${sel.id} · ${sel.placa} · ${sel.spot}</div>
-   ${pend.length>1?`<select class="input" onchange="S.selPay=this.value;renderAdmin()">${pend.map(p=>`<option value="${p.id}" ${p.id===sel.id?"selected":""}>${p.id} · ${p.placa}</option>`).join("")}</select>`:""}
+  const stopped=!!sel.pagoStop, until=stopped?sel.pagoStop:now(), k=calc(sel,until), paid=paidOf(sel), due=Math.max(0,k.total-paid);
+  return `<div class="h2">Estancia ${sel.id} · ${esc(sel.placa)} · ${sel.spot||"—"}</div>
+   ${pend.length>1?`<select class="input" onchange="S.selPay=this.value;renderAdmin()">${pend.map(p=>`<option value="${p.id}" ${p.id===sel.id?"selected":""}>${p.id} · ${esc(p.placa)}</option>`).join("")}</select>`:""}
    <div class="kv"><span>Hora de ingreso</span><b>${fmtT(sel.ingreso)}</b></div>
    <div class="kv"><span>Hora de pago</span><b class="live" id="pay-hora">${stopped?fmtT(until):"En curso · "+fmtT(until)}</b></div>
    <div class="kv"><span>Tiempo de permanencia</span><b class="live" id="pay-dur">${dur(k.ms)}</b></div>
    <div class="kv"><span>Fracciones de ${S.cfg.fraccion} min</span><b class="live" id="pay-fr">${k.fr}</b></div>
    <div class="kv"><span>Tarifa por fracción</span><b>${money(S.cfg.tarifa)}</b></div>
-   <div class="kv" style="font-size:17px"><span>Total a pagar</span><b class="live" id="pay-tot" style="color:#1565C0">${k.mens?"Mensualidad vigente · USD 0,00":money(k.total)}</b></div>
-   ${!stopped?`<div class="muted" style="font-size:12px">Las horas las registra el sistema y no se pueden editar. Cuando el conductor vaya a pagar, detenga el tiempo.</div>
+   ${paid?`<div class="kv"><span>Total recalculado desde el ingreso</span><b class="live" id="pay-tot">${money(k.total)}</b></div>
+     <div class="kv"><span>Ya pagado</span><b>${money(paid)}</b></div>
+     <div class="kv" style="font-size:17px"><span>Diferencia a pagar (RN-08)</span><b class="live" id="pay-due" style="color:#1565C0">${money(due)}</b></div>`
+   :`<div class="kv" style="font-size:17px"><span>Total a pagar</span><b class="live" id="pay-tot" style="color:#1565C0">${money(k.total)}</b></div>`}
+   ${k.nota?`<div class="small">${k.nota}</div>`:""}
+   ${!stopped?`<div class="small">Las horas las registra el sistema y no se pueden editar (RF-09). Cuando el conductor vaya a pagar, detenga el tiempo.</div>
      <button class="btn danger" onclick="stopTime('${sel.id}')">⏹ Detener tiempo y calcular cobro</button>`
    :`<div class="form" style="margin-top:4px"><div><label class="label">Método</label><select class="input" id="a-met"><option>Efectivo</option><option>Tarjeta</option><option>Transferencia</option></select></div>
-     <div><label class="label">Referencia</label><input class="input" id="a-ref" placeholder="Opcional"></div></div>
+     <div><label class="label">Referencia</label><input class="input" id="a-ref" placeholder="Tarjeta o transferencia"></div></div>
+     <div><label class="label">Monto recibido (USD)</label><input class="input" id="a-monto" value="${due.toFixed(2)}"></div>
      <button class="btn primary" onclick="confirmPay('${sel.id}')">Confirmar pago (RF-10)</button>
      <button class="btn secondary" onclick="resumeTime('${sel.id}')">Reanudar tiempo</button>`}`;
 }
 function renderAdmin(){
-  const nav=document.getElementById("a-nav"), pend=S.alerts.length;
-  nav.innerHTML=TABS.map(([k,t])=>`<button class="item ${S.adminTab===k?"on":""}" onclick="adminTab('${k}')"><span>${t}</span>${k==="panel"&&pend?`<span class="badge">${pend}</span>`:""}${k==="placas"&&S.entrada.status==="verificando"?`<span class="badge">1</span>`:""}${k==="pagos"&&S.stays.some(s=>s.estado==="Ocupado"&&!s.pago)?`<span class="badge" style="background:#1565C0">${S.stays.filter(s=>s.estado==="Ocupado"&&!s.pago).length}</span>`:""}</button>`).join("");
-  const m=document.getElementById("a-main"), c=counts(), t=S.adminTab;
-  const logHTML=`<div class="log">${S.log.map(l=>`<div>${l}</div>`).join("")||"<div>—</div>"}</div>`;
-  if(t==="panel") m.innerHTML=`
-    <div class="kpis">
+  const nav=document.getElementById("a-nav"), main=document.getElementById("a-main"), user=document.getElementById("a-user"), help=document.getElementById("help-admin");
+  // ---------- P-10
+  if(!S.session){
+    nav.style.display="none"; user.textContent="";
+    help.innerHTML=`<span><span class="code">P-10</span> Inicio de sesión del encargado. Todas las operaciones del encargado requieren autenticación (RNF-03). Datos de prueba: <b>encargado01</b> / <b>smartpark</b>.</span>`;
+    const pend=S.login.pending;
+    main.innerHTML=`<div class="login"><div class="card" style="width:400px;display:flex;flex-direction:column;gap:14px;padding:30px">
+      <div class="sec"><span class="code">P-10</span><span class="small">Inicio de sesión del encargado</span></div>
+      <div class="h1" style="font-size:22px">${pend?"Defina su contraseña":"Acceso del encargado"}</div>
+      ${pend?`<div class="muted">Primer inicio de sesión de <b>${esc(pend)}</b>. Al definir su contraseña la cuenta pasa a «habilitada» (RF-24).</div>
+        <div><label class="label">Nueva contraseña</label><input class="input" type="password" id="l-p1"></div>
+        <div><label class="label">Repita la contraseña</label><input class="input" type="password" id="l-p2"></div>
+        ${S.login.err?`<div class="err">${S.login.err}</div>`:""}
+        <button class="btn primary" onclick="definePass()">Guardar e ingresar</button>
+        <button class="lnk" onclick="S.login={err:null,pending:null};renderAdmin()">Volver</button>`
+      :`<div><label class="label">Usuario</label><input class="input" id="l-user" value="encargado01"></div>
+        <div><label class="label">Contraseña</label><input class="input" type="password" id="l-pass" value="smartpark" onkeydown="if(event.key==='Enter')adminLogin()"></div>
+        ${S.login.err?`<div class="err">${S.login.err}</div>`:""}
+        <button class="btn primary" onclick="adminLogin()">Ingresar</button>
+        <div class="small">Cada encargado tiene su propio usuario; no hay cuentas compartidas.</div>`}
+      </div></div>`;
+    return;
+  }
+  nav.style.display="flex";
+  const me=S.cuentas.find(c=>c.u===S.session.u);
+  user.innerHTML=`Encargado: <b>${esc(me.u)}</b> · <button class="lnk" style="color:#D6E6F7;text-decoration:underline" onclick="adminLogout()">Cerrar sesión</button>`;
+  const pend=S.alerts.length+S.obs.filter(o=>o.estado!=="resuelta").length;
+  const npay=S.stays.filter(s=>(s.estado==="Ocupado"||s.estado==="Ubicación no confirmada")&&!s.pago&&!(s.mensual&&calc(s,now()).mens)).length;
+  nav.innerHTML=TABS.map(([k,t,c])=>`<button class="item ${S.adminTab===k?"on":""}" onclick="adminTab('${k}')"><span>${t}</span><span style="display:flex;gap:4px;align-items:center">${k==="panel"&&pend?`<span class="badge">${pend}</span>`:""}${k==="placas"&&S.entrada.status==="verificando"?`<span class="badge">1</span>`:""}${k==="pagos"&&npay?`<span class="badge" style="background:#1565C0">${npay}</span>`:""}<span class="code">${c}</span></span></button>`).join("");
+  const t=S.adminTab, c=counts();
+  const tabInfo=TABS.find(x=>x[0]===t);
+  help.innerHTML=`<span><span class="code">${tabInfo[2]}</span> ${tabInfo[1]}. Los cambios se reflejan en la pantalla de la entrada y en el celular del conductor. Cada acción queda en el registro (RNF-09).</span>`;
+  const logHTML=`<div class="log">${S.log.map(l=>`<div>${esc(l)}</div>`).join("")||"<div>—</div>"}</div>`;
+  if(t==="panel"){
+    const dispo=MAPSPOTS.map(m=>m.n).filter(k=>S.spots[k]==="D");
+    const alertsHTML=S.alerts.map(a=>{
+      let acts=`<button class="lnk" onclick="resolveAlert('${a.id}')">Marcar como atendida</button>`;
+      if(a.tipo==="placa") acts=`<button class="lnk" onclick="adminTab('placas')">Corregir placa</button>`;
+      if(a.tipo==="unconf"){const s=stay(a.ref); acts=`<select id="rs-${a.id}">${dispo.map(d=>`<option ${d===s.asignado?"selected":""}>${d}</option>`).join("")}</select><button class="lnk" onclick="registerReal('${a.id}')">Registrar puesto real (RN-01)</button>`;}
+      if(a.tipo==="verif"){acts=`<button class="lnk" onclick="manualConfirm('${a.ref}','${a.id}')">Confirmar puesto (verificado en sitio, RN-04)</button>`;}
+      return `<div class="alert" style="background:${a.bg};color:${a.fg}"><b>${esc(a.t)}</b><div>${esc(a.d)}</div><div class="acts">${acts}</div></div>`;}).join("");
+    const obsHTML=S.obs.filter(o=>o.estado!=="resuelta").map(o=>`<div class="alert" style="background:#EDF2F7;color:#2D3748"><b>Novedad ${o.id} · ${o.spot||"—"} · ${esc(o.placa)} · ${o.estado}</b><div>${esc(o.tipo)}: «${esc(o.txt)}»</div>
+       <div class="acts">${o.estado==="pendiente"?`<button class="lnk" onclick="obsReview('${o.id}')">Revisar (en revisión)</button>`:`<input id="sol-${o.id}" placeholder="Solución registrada" style="width:170px"><button class="lnk" onclick="obsResolve('${o.id}')">Resolver</button>`}</div></div>`).join("");
+    main.innerHTML=`<div class="kpis">
       <div class="kpi"><div class="label">Disponibles</div><div class="v" style="color:#2E7D32">${c.D}</div></div>
       <div class="kpi"><div class="label">En reserva</div><div class="v" style="color:#B7791F">${c.R}</div></div>
       <div class="kpi"><div class="label">Ocupados</div><div class="v" style="color:#C62828">${c.O}</div></div>
-      <div class="kpi"><div class="label">Alertas pendientes</div><div class="v" style="color:#1565C0">${pend}</div></div></div>
+      <div class="kpi"><div class="label">Alertas y novedades</div><div class="v" style="color:#1565C0">${pend}</div></div></div>
     <div class="grid"><div class="colL">
       <div class="card" style="padding:14px"><div class="h2" style="margin-bottom:8px">Mapa del parqueadero</div>${bigMap()}</div>
       <div class="card" style="padding:14px"><div class="h2" style="margin-bottom:8px">Estancias</div>${staysTable()}</div>
     </div><div class="colR">
-      <div class="card" style="padding:14px;display:flex;flex-direction:column;gap:10px"><div class="h2">Alertas y observaciones</div>
-        ${pend?S.alerts.map(a=>`<div class="alert" style="background:${a.bg};color:${a.fg}"><b>${a.t}</b><br>${a.d}<div style="margin-top:6px;display:flex;gap:12px">${a.tipo==="placa"?`<button class="lnk" onclick="adminTab('placas')">Corregir placa</button>`:""}<button class="lnk" onclick="resolveAlert(${a.id})">Marcar como atendida</button></div></div>`).join(""):`<div class="muted">Sin alertas pendientes.</div>`}</div>
-      <div class="card" style="padding:14px"><div class="h2" style="margin-bottom:8px">Registro de acciones</div>${logHTML}</div>
+      ${entradaCard()}
+      <div class="card" style="padding:14px;display:flex;flex-direction:column;gap:10px"><div class="h2">Alertas y novedades</div>${alertsHTML+obsHTML||`<div class="muted">Sin alertas pendientes.</div>`}</div>
+      <div class="card" style="padding:14px"><div class="h2" style="margin-bottom:8px">Registro de acciones (RNF-09)</div>${logHTML}</div>
     </div></div>`;
+  }
   if(t==="placas"){ const v=S.entrada.status==="verificando";
-    m.innerHTML=`<div class="h1">Lectura y corrección de placas</div>
+    main.innerHTML=`<div class="h1">Registro y corrección de placas</div>
     <div class="grid"><div class="colL"><div class="card" style="display:flex;flex-direction:column;gap:12px"><div class="h2">Imagen captada por la cámara de entrada</div>
-      <div class="cam" style="height:260px"><div class="tag" style="color:${v?"#FBD38D":"#9AE6B4"}">${v?"● Lectura dudosa / rechazada por el conductor":"● Sin correcciones pendientes"}</div><div class="mini">${S.entrada.read}</div></div></div></div>
-    <div class="colR"><div class="card" style="display:flex;flex-direction:column;gap:12px"><div class="h2">Corregir lectura (RF-02)</div>
-      <div class="muted">${v?"Lea la imagen y escriba la placa correcta. Si el vehículo no tiene placa, asigne un identificador provisional.":"No hay placas pendientes de corrección."}</div>
-      <div><label class="label">Placa correcta</label><input class="input" id="a-plate" value="${v?"DEM-1234":""}"></div>
-      <button class="btn primary" onclick="fixPlate()" ${v?"":"disabled"}>Guardar placa</button>
-      <button class="btn secondary" onclick="tmpPlate()" ${v?"":"disabled"}>Asignar identificador provisional</button></div></div></div>`; }
-  if(t==="pagos") m.innerHTML=`<div class="h1">Estancias y pagos</div><div class="grid"><div class="colL"><div class="card" style="padding:14px">${staysTable()}</div></div>
+      <div class="cam" style="height:260px"><div class="tag" style="color:${v?"#FBD38D":"#9AE6B4"}">${v?"● Lectura dudosa o rechazada por el conductor":"● Sin correcciones pendientes"}</div><div class="mini">${esc(S.entrada.read)}</div></div>
+      <div class="small">Primero lea la placa en la imagen; solo si no se distingue, acérquese a preguntar al conductor (RN-06).</div></div>
+      <div class="card" style="display:flex;flex-direction:column;gap:10px"><div class="h2">Cargar la planilla de contingencia</div>
+      <div class="small">RN-10 · Si el sistema estuvo sin conexión, el encargado anotó en papel la placa, la hora y el puesto. Al volver la conexión los carga aquí con la marca «contingencia».</div>
+      <div class="form" style="grid-template-columns:1fr 1fr 1fr auto;align-items:end"><div><label class="label">Placa</label><input class="input" id="ct-p" value="PDA-3307"></div>
+      <div><label class="label">Puesto</label><select class="input" id="ct-s">${MAPSPOTS.map(m=>m.n).filter(k=>S.spots[k]==="D").map(k=>`<option>${k}</option>`).join("")}</select></div>
+      <div><label class="label">Hora anotada</label><input class="input" type="time" id="ct-h" value="${fmtHM(now()-30*60000)}"></div>
+      <button class="sbtn" style="width:auto" onclick="loadCont()">Cargar</button></div></div></div>
+    <div class="colR"><div class="card" style="display:flex;flex-direction:column;gap:12px"><div class="h2">Corregir la placa (RF-02)</div>
+      <div><label class="label">Placa correcta</label><input class="input" id="a-plate" value="${v?"DEM-1234":""}" ${v?"":"disabled"}></div>
+      <button class="btn primary" onclick="fixPlate()" ${v?"":"disabled"}>Guardar placa y mostrar el QR</button>
+      <div class="h2" style="font-size:15px;margin-top:6px">Vehículo sin placa</div>
+      <div class="form"><div><label class="label">Marca</label><input class="input" id="sp-marca" value="Chevrolet" ${v?"":"disabled"}></div><div><label class="label">Color</label><input class="input" id="sp-color" value="Gris" ${v?"":"disabled"}></div></div>
+      <div><label class="label">Modelo</label><input class="input" id="sp-modelo" value="Onix" ${v?"":"disabled"}></div>
+      <button class="btn secondary" onclick="assignSP()" ${v?"":"disabled"}>Asignar identificador provisional SP-${String(S.seq.sp+1).padStart(3,"0")}</button>
+      <div class="small">Se guarda la imagen de la cámara vinculada a la estancia; la salida se valida de forma manual (RF-11).</div></div></div></div>`; }
+  if(t==="pagos") main.innerHTML=`<div class="h1">Estancia y pago</div><div class="grid"><div class="colL"><div class="card" style="padding:14px">${staysTable()}</div></div>
     <div class="colR"><div class="card" style="display:flex;flex-direction:column;gap:10px" id="pay-card">${payPanel()}</div></div></div>`;
-  if(t==="salidas") m.innerHTML=`<div class="h1">Validación de salida</div><div class="card" style="padding:14px">
-    <table><tr><th>Estancia</th><th>Placa</th><th>Puesto</th><th>Ingreso</th><th>Pago</th><th>Gracia (${S.cfg.gracia} min)</th><th>Acción</th></tr>
-    ${S.stays.filter(s=>s.estado==="Ocupado").map(s=>{const g=s.pago?(s.pago.hora+S.cfg.gracia*60000-now()):null;const venc=g!==null&&g<0;
-      return `<tr><td>${s.id}</td><td>${s.placa}</td><td>${s.spot}</td><td>${fmtHM(s.ingreso)}</td>
-      <td>${s.pago?`<span class="tag" style="background:#E6F4EA;color:#2E7D32">Confirmado · ${money(s.pago.total)}</span>`:`<span class="tag" style="background:#FDE8E8;color:#C62828">Pendiente</span>`}</td>
-      <td class="live">${s.pago?(venc?`<span class="tag" style="background:#FDE8E8;color:#C62828">Vencida</span>`:Math.floor(g/60000)+" min "+String(Math.floor(g/1000)%60).padStart(2,"0")+" s"):"—"}</td>
-      <td>${venc?`<button class="lnk" onclick="recharge('${s.id}')">Recalcular cobro (RN-08)</button>`:`<button class="lnk" ${s.pago?"":"disabled"} onclick="exitStay('${s.id}')">Autorizar salida y abrir talanquera</button>`}</td></tr>`;}).join("")||`<tr><td colspan="7" class="muted">No hay vehículos estacionados.</td></tr>`}</table>
-    <div class="muted" style="margin-top:10px">La salida solo se autoriza con el pago o la mensualidad confirmados (RN-07). Si pasan más de ${S.cfg.gracia} minutos después de pagar, se recalcula el cobro (RN-08). Al autorizar: se cierra la estancia, se revoca el acceso y el puesto vuelve a «Disponible» (RF-12).</div></div>`;
-  if(t==="mensuales") m.innerHTML=`<div class="h1">Conductores mensuales</div><div class="grid"><div class="colL"><div class="card" style="padding:14px">
-    <table><tr><th>Placa</th><th>Nombre</th><th>Correo</th><th>Cuenta</th><th>Mensualidad</th></tr>
-    ${S.mensuales.map((x,i)=>`<tr><td>${x.placa}</td><td>${x.nombre}</td><td>${x.correo}</td><td>${x.verificada?`<span class="tag" style="background:#E6F4EA;color:#2E7D32">Verificada</span>`:`<button class="lnk" onclick="verify(${i})">Simular código del correo</button>`}</td><td>${x.vigencia||"—"}</td></tr>`).join("")}</table></div></div>
-    <div class="colR"><div class="card" style="display:flex;flex-direction:column;gap:10px"><div class="h2">Registrar conductor mensual (RF-13)</div>
+  if(t==="salidas"){
+    const rows=S.stays.filter(s=>s.ingreso&&(s.estado==="Ocupado"||s.estado==="Ubicación no confirmada")).map(s=>{
+      const vig=s.mensual&&calc(s,now()).mens, g=s.pago?(s.pago.hora+S.cfg.gracia*60000-now()):null, venc=g!==null&&g<0;
+      const okPago=vig||(s.pago&&!venc);
+      let accion;
+      if(s.sp){ const m=S.manual[s.id]||{a:false,b:false,c:false}; const all=m.a&&m.b&&m.c;
+        accion=`<div style="display:flex;flex-direction:column;gap:4px;white-space:normal;min-width:230px"><b style="font-size:12px">Validación manual (RF-11)</b>
+          <label class="chk"><input type="checkbox" ${m.a?"checked":""} onchange="mchk('${s.id}','a',this.checked)">Estancia abierta con su QR en el celular</label>
+          <label class="chk"><input type="checkbox" ${m.b?"checked":""} onchange="mchk('${s.id}','b',this.checked)">Imagen de salida = imagen de ingreso</label>
+          <label class="chk"><input type="checkbox" ${m.c?"checked":""} onchange="mchk('${s.id}','c',this.checked)">Vehículo = ${esc(s.sp.marca)} ${esc(s.sp.color)} ${esc(s.sp.modelo)}</label>
+          <button class="lnk" ${all&&okPago?"":"disabled"} onclick="authorizeExit('${s.id}',true)">Autorizar salida manualmente</button></div>`; }
+      else if(venc) accion=`<button class="lnk" onclick="recharge('${s.id}')">Recalcular cobro (RN-08)</button>`;
+      else accion=`<button class="lnk" ${okPago?"":"disabled"} onclick="authorizeExit('${s.id}')">Leer placa y autorizar salida</button>`;
+      return `<tr><td>${s.id}</td><td>${esc(s.placa)}</td><td>${s.spot||"—"}</td><td>${fmtHM(s.ingreso)}</td>
+       <td>${vig?`<span class="tag" style="background:#EAF2FD;color:#1565C0">Mensualidad vigente</span>`:s.pago?`<span class="tag" style="background:#E6F4EA;color:#2E7D32">Pagada · ${money(paidOf(s))}</span>`:`<span class="tag" style="background:#FDE8E8;color:#C62828">Pago pendiente</span>`}</td>
+       <td class="live" id="g-${s.id}" ${venc?'data-exp="1"':""}>${s.pago&&!vig?(venc?`<span class="tag" style="background:#FDE8E8;color:#C62828">Vencida</span>`:Math.floor(g/60000)+" min "+String(Math.floor(g/1000)%60).padStart(2,"0")+" s"):"—"}</td><td>${accion}</td></tr>`;}).join("");
+    main.innerHTML=`<div class="h1">Validación y cierre de salida</div><div class="card" style="padding:14px">
+    <table><tr><th>Estancia</th><th>Placa</th><th>Puesto</th><th>Ingreso</th><th>Pago o mensualidad</th><th>Gracia (${S.cfg.gracia} min)</th><th>Acción</th></tr>
+    ${rows||`<tr><td colspan="7" class="muted">No hay vehículos dentro del parqueadero.</td></tr>`}</table>
+    <div class="small" style="margin-top:10px">La salida se autoriza solo con el pago o la mensualidad confirmados y la placa leída en la salida (RF-11, RN-07). Si pasan más de ${S.cfg.gracia} min tras el pago, se recalcula desde el ingreso (RN-08). Al autorizar: se cierra la estancia, se revoca el acceso QR y el puesto vuelve a «Disponible» (RF-12).</div></div>`;
+  }
+  if(t==="mensuales"){
+    main.innerHTML=`<div class="h1">Conductores mensuales</div><div class="grid"><div class="colL"><div class="card" style="padding:14px">
+    <table><tr><th>Placa</th><th>Conductor</th><th>Cuenta</th><th>Mensualidad</th><th>Acción</th></tr>
+    ${S.mensuales.map((x,i)=>{const vig=x.mens&&x.mens.desde<=now()&&now()<x.mens.hasta;
+      return `<tr><td>${esc(x.placa)}</td><td>${esc(x.nombre)}<div class="small">${esc(x.correo)}</div></td>
+      <td>${x.verificada?`<span class="tag" style="background:#E6F4EA;color:#2E7D32">Verificada</span>`:`<span class="tag" style="background:#FFF4D6;color:#B7791F">Sin verificar</span>`}</td>
+      <td class="wr">${x.mens?`${vig?"Vigente":"Vencida"} hasta ${fmtD(x.mens.hasta)}`:"—"}</td>
+      <td class="wr">${x.verificada?`<button class="lnk" onclick="registerMens(${i})">${x.mens?"Renovar":"Registrar"} mensualidad</button>`:`<button class="lnk" onclick="newCode(S.mensuales[${i}]);toast('Código reenviado (bandeja de prueba)');renderAdmin()">Reenviar código</button>`}</td></tr>`;}).join("")}</table>
+    <div class="small" style="margin-top:8px">La mensualidad solo se registra para cuentas verificadas; queda vigente hasta el mismo día del mes siguiente (RF-21). Para verificar la cuenta, el conductor ingresa el código en su celular (P-08).</div></div></div>
+    <div class="colR">${mensForm()}<div class="card" style="display:flex;flex-direction:column;gap:10px"><div class="h2">Registrar conductor mensual</div><div class="small">RF-13 · datos ficticios, sin cédulas reales</div>
     <div><label class="label">Placa</label><input class="input" id="m-p" value="GHT-4410"></div><div><label class="label">Nombre</label><input class="input" id="m-n" value="Conductor mensual 2"></div>
-    <div><label class="label">Correo</label><input class="input" id="m-c" value="mensual2@correo.com"></div><button class="btn primary" onclick="addMensual()">Registrar y enviar código</button></div></div></div>`;
-  if(t==="cuentas") m.innerHTML=`<div class="h1">Cuentas de encargado</div><div class="grid"><div class="colL"><div class="card" style="padding:14px">
-    <table><tr><th>Usuario</th><th>Nombre</th><th>Estado</th><th>Acción</th></tr>
-    ${S.cuentas.map((x,i)=>`<tr><td>${x.u}</td><td>${x.n}</td><td>${x.e}</td><td>${x.e==="Habilitada"&&i>0?`<button class="lnk" onclick="S.cuentas[${i}].e='Deshabilitada';renderAdmin()">Deshabilitar</button>`:x.e==="Deshabilitada"?`<button class="lnk" onclick="S.cuentas[${i}].e='Habilitada';renderAdmin()">Habilitar</button>`:"—"}</td></tr>`).join("")}</table></div></div>
+    <div><label class="label">Correo</label><input class="input" id="m-c" value="mensual2@correo.test"></div>
+    <button class="btn primary" onclick="addMensual()">Registrar y enviar código</button>
+    <div class="small">Se envía un código de un solo uso al correo (bandeja de prueba). Cuando la cuenta esté verificada (P-08) se puede registrar la mensualidad.</div></div></div></div>`;
+  }
+  if(t==="cuentas"){
+    main.innerHTML=`<div class="h1">Cuentas de encargado</div><div class="grid"><div class="colL"><div class="card" style="padding:14px">
+    <table><tr><th>Usuario</th><th>Encargado</th><th>Estado</th><th>Acción</th></tr>
+    ${S.cuentas.map((x,i)=>`<tr><td>${esc(x.u)}</td><td>${esc(x.n)}<div class="small">${esc(x.c)}</div></td><td>${x.e}</td><td>${x.u===S.session.u?`<span class="small">Su propia cuenta</span>`:x.e==="Habilitada"?`<button class="lnk" onclick="toggleCuenta(${i},'Deshabilitada')">Deshabilitar</button>`:x.e==="Deshabilitada"?`<button class="lnk" onclick="toggleCuenta(${i},'Habilitada')">Habilitar</button>`:"—"}</td></tr>`).join("")}</table>
+    <div class="small" style="margin-top:8px">Un encargado no puede deshabilitar su propia cuenta. Una cuenta deshabilitada no puede iniciar sesión (RF-24).</div></div></div>
     <div class="colR"><div class="card" style="display:flex;flex-direction:column;gap:10px"><div class="h2">Crear cuenta (RF-24)</div>
-    <div><label class="label">Usuario</label><input class="input" id="u-u" value="encargado03"></div><div><label class="label">Nombre</label><input class="input" id="u-n" value="Nuevo encargado"></div>
-    <div class="muted" style="font-size:12px">Queda habilitada cuando su titular define la contraseña en el primer inicio de sesión.</div>
-    <button class="btn primary" onclick="S.cuentas.push({u:document.getElementById('u-u').value,n:document.getElementById('u-n').value,e:'Pendiente de contraseña'});renderAdmin()">Crear cuenta</button></div></div></div>`;
-  if(t==="sim") m.innerHTML=`<div class="h1">Simulación de eventos (RF-20)</div><div class="grid"><div class="colL"><div class="card" style="display:flex;flex-direction:column;gap:12px">
-      <div class="muted">Todos los eventos quedan registrados con la marca «simulado».</div>
+    <div><label class="label">Nombre</label><input class="input" id="u-n" value="Nuevo encargado"></div><div><label class="label">Usuario</label><input class="input" id="u-u" value="encargado03"></div>
+    <div><label class="label">Correo</label><input class="input" id="u-c" value="encargado03@smartpark.test"></div>
+    <div class="small">Queda «pendiente de activación» hasta que su titular define la contraseña en su primer inicio de sesión (P-10).</div>
+    <button class="btn primary" onclick="createCuenta()">Crear cuenta</button></div></div></div>`;
+  }
+  if(t==="sim") main.innerHTML=`<div class="h1">Simulación de eventos (RF-20)</div><div class="grid"><div class="colL"><div class="card" style="display:flex;flex-direction:column;gap:12px">
+      <div class="small">Reemplazan a la cámara, la talanquera y el GPS. Cada evento queda registrado con la marca «simulado» (RE-08).</div>
       <div class="form"><div><label class="label">Placa a leer en la entrada</label><input class="input" id="s-plate" value="PCQ-5521"></div>
       <div style="display:flex;align-items:flex-end"><button class="sbtn" onclick="simRead()">Leer placa en la entrada (cámara)</button></div></div>
       <button class="sbtn" onclick="simRead('D?M-12?4')">Simular lectura fallida (placa sucia)</button>
-      <button class="sbtn" onclick="advance(70)">Adelantar el reloj 70 minutos (para probar el cobro por fracciones)</button>
+      <button class="sbtn" onclick="simRead('PBX-7781')">Llega el conductor mensual (PBX-7781)</button>
+      <button class="sbtn" onclick="simGate();renderAdmin()">Levantar la talanquera de entrada</button>
+      <button class="sbtn" onclick="advance(70)">Adelantar el reloj 70 minutos (probar el cobro por fracciones)</button>
+      <button class="sbtn" onclick="advance(11)">Adelantar el reloj 11 minutos (probar el código vencido)</button>
+      <button class="sbtn" onclick="expireMens()">Vencer la mensualidad de PBX-7781 (probar RN-11)</button>
+      <button class="sbtn" onclick="fillLot()">${S.backupSpots?"Restaurar los puestos":"Ocupar todos los puestos (probar «Parqueadero lleno»)"}</button>
     </div></div><div class="colR"><div class="card" style="padding:14px"><div class="h2" style="margin-bottom:8px">Registro</div>${logHTML}</div></div></div>`;
-  if(t==="cfg") m.innerHTML=`<div class="h1">Configuración</div><div class="card" style="max-width:560px;display:flex;flex-direction:column;gap:12px"><div class="form">
+  if(t==="cfg") main.innerHTML=`<div class="h1">Configuración</div><div class="card" style="max-width:600px;display:flex;flex-direction:column;gap:12px"><div class="form">
       <div><label class="label">Tarifa por fracción (USD)</label><input class="input" type="number" step=".25" value="${S.cfg.tarifa}" onchange="S.cfg.tarifa=+this.value"></div>
       <div><label class="label">Fracción de cobro (min)</label><input class="input" type="number" value="${S.cfg.fraccion}" onchange="S.cfg.fraccion=+this.value"></div>
       <div><label class="label">Tiempo de reserva (min)</label><input class="input" type="number" value="${S.cfg.reserva}" onchange="S.cfg.reserva=+this.value"></div>
       <div><label class="label">Radio de ubicación (m)</label><input class="input" type="number" value="${S.cfg.radio}" onchange="S.cfg.radio=+this.value"></div>
-      <div><label class="label">Gracia tras pagar (min)</label><input class="input" type="number" value="${S.cfg.gracia}" onchange="S.cfg.gracia=+this.value"></div></div>
-    <div class="muted">Los cambios se aplican sin modificar el código.</div><button class="btn primary" onclick="toast('Configuración guardada');log('Configuración actualizada')">Guardar</button></div>`;
+      <div><label class="label">Gracia tras pagar (min)</label><input class="input" type="number" value="${S.cfg.gracia}" onchange="S.cfg.gracia=+this.value"></div>
+      <div><label class="label">Valor de la mensualidad (USD, valor de prueba)</label><input class="input" type="number" step="1" value="${S.cfg.mensualidad}" onchange="S.cfg.mensualidad=+this.value"></div></div>
+    <div class="small">Los parámetros se cambian sin modificar el código.</div><button class="btn primary" onclick="toast('Configuración guardada');log('Configuración actualizada');renderAdmin()">Guardar</button></div>`;
 }
 function staysTable(){
-  if(!S.stays.length) return `<div class="muted">Aún no hay estancias. Empiece en la pantalla de la entrada.</div>`;
-  return `<table><tr><th>Estancia</th><th>Placa</th><th>Destino</th><th>Puesto</th><th>Ingreso</th><th>Estado</th><th>Pago</th><th>Acción</th></tr>${S.stays.map(s=>`<tr><td>${s.id}</td><td>${s.placa}</td><td>${s.dest}</td><td>${s.spot}</td><td>${s.ingreso?fmtHM(s.ingreso):"—"}</td><td>${stateTag(s.estado)}</td><td>${s.pago?money(s.pago.total):"—"}</td><td>${
-    s.estado==="En reserva"?`<button class="lnk" onclick="manualConfirm('${s.id}')">Confirmar puesto manualmente</button>`:
-    s.estado==="Ocupado"&&!s.pago?`<button class="lnk" onclick="S.selPay='${s.id}';adminTab('pagos')">Cobrar</button>`:
-    s.estado==="Ocupado"?`<button class="lnk" onclick="adminTab('salidas')">Autorizar salida</button>`:"—"}</td></tr>`).join("")}</table>`;
+  const list=S.stays.filter(s=>s.estado!=="Solicitud"||s.scanned);
+  if(!list.length) return `<div class="muted">Aún no hay estancias. Empiece en la pantalla de la entrada.</div>`;
+  return `<table><tr><th>Estancia</th><th>Placa</th><th>Destino</th><th>Puesto</th><th>Ingreso</th><th>Estado</th><th>Pago</th><th>Acción</th></tr>${list.map(s=>`<tr><td>${s.id}</td><td>${esc(s.placa)}${s.mensual?' <span class="tag" style="background:#EAF2FD;color:#1565C0">mensual</span>':""}${s.sinCel?' <span class="tag" style="background:#EDF2F7;color:#4A5568">sin celular</span>':""}${s.cont?' <span class="tag" style="background:#FFF4D6;color:#7B5A12">contingencia</span>':""}</td><td>${s.dest||"—"}</td><td>${s.spot||"—"}</td><td>${s.ingreso?fmtHM(s.ingreso):"—"}</td><td>${stateTag(s.estado)}</td><td>${s.pagos&&s.pagos.length?money(paidOf(s))+(s.pago?"":' <span class="small">+ dif.</span>'):"—"}</td><td>${
+    s.estado==="Ocupado"&&!s.pago&&!(s.mensual&&calc(s,now()).mens)?`<button class="lnk" onclick="S.selPay='${s.id}';adminTab('pagos')">Cobrar</button>`:
+    s.estado==="Ocupado"?`<button class="lnk" onclick="adminTab('salidas')">Validar salida</button>`:"—"}</td></tr>`).join("")}</table>`;
 }
+function entradaCard(){
+  const e=S.entrada, s=stay(e.stayId);
+  let body;
+  if(e.status==="leida"&&s) body=`<div class="muted">Placa <b>${esc(s.placa)}</b> · QR en pantalla, aún sin escanear.</div>
+    <div class="small">Si el conductor no tiene celular o conexión, asígnele y confírmele el puesto desde aquí e indíqueselo de palabra; no tendrá la ruta en el mapa (RN-09).</div>
+    <div class="form"><select class="input" id="rn9-b">${BLOCKS.map(b=>`<option>${b.n}</option>`).join("")}</select><button class="sbtn" onclick="attendNoPhone()">Atender sin celular</button></div>`;
+  else if(e.status==="verificando") body=`<div class="muted">Placa en revisión (${esc(e.read)}).</div><button class="lnk" onclick="adminTab('placas')">Ir a Registro y corrección de placas</button>`;
+  else if(e.status==="escaneado"&&s) body=`<div class="muted"><b>${esc(s.placa)}</b> sigue las indicaciones en su celular (${s.estado}).</div>`;
+  else body=`<div class="muted">Sin vehículos esperando en la entrada.</div>`;
+  return `<div class="card" style="padding:14px;display:flex;flex-direction:column;gap:8px"><div class="h2">Vehículo en la entrada</div>${body}</div>`;
+}
+function attendNoPhone(){const s=stay(S.entrada.stayId); if(!s) return; const b=document.getElementById("rn9-b").value;
+  const spot=NEAR[b].find(x=>S.spots[x]==="D"); if(!spot){toast("No hay puestos disponibles cerca de "+b+".");return;}
+  s.dest=b; s.spot=spot; s.asignado=spot; s.sinCel=true; s.ingreso=now(); s.confirmada=now(); s.estado="Ocupado"; S.spots[spot]="O";
+  const c=center(spot); if(c) s.car={x:c.x,y:c.y};
+  S.entrada={status:"libre",read:"—",plate:"—",stayId:null};
+  log(`${s.id} · ${S.session.u} atendió sin celular: ${b} → ${spot}, ingreso ${fmtHM(s.ingreso)}, puesto confirmado desde el panel (RN-09)`);
+  toast(`Indique de palabra al conductor su puesto: ${spot}.`); render();}
+function loadCont(){const placa=document.getElementById("ct-p").value.trim().toUpperCase(), spot=document.getElementById("ct-s").value, hh=document.getElementById("ct-h").value;
+  if(!placa||!hh){toast("Complete la placa y la hora anotada.");return;}
+  if(S.stays.some(x=>isActive(x)&&x.placa===placa)){toast("Esa placa ya tiene una estancia activa.");return;}
+  const [H,M]=hh.split(":").map(Number), d=new Date(now()); d.setHours(H,M,0,0);
+  if(+d>now()){toast("La hora anotada no puede ser posterior a la hora actual.");return;}
+  if(S.spots[spot]!=="D"){toast("Ese puesto ya no está disponible.");return;}
+  S.seq.stay++; const id="E-"+String(S.seq.stay).padStart(3,"0");
+  S.stays.push({id,ref:"CONT-"+id.slice(2),placa,sp:null,mensual:mensVigente(placa,+d),dest:"—",spot,asignado:spot,estado:"Ocupado",scanned:false,ingreso:+d,confirmada:+d,cont:true,car:{...(center(spot)||OUTSIDE)},walker:null,ruta:false,zona:null,pagoStop:null,pago:null});
+  S.spots[spot]="O";
+  log(`${id} · ${placa} cargada desde la planilla: ${spot}, ingreso ${hh}, marca «contingencia» (RN-10, RNF-09)`);
+  toast(`Estancia ${id} cargada con la marca «contingencia».`); renderAdmin();}
 function resolveAlert(id){S.alerts=S.alerts.filter(a=>a.id!==id);renderAdmin();}
-function fixPlate(){const p=document.getElementById("a-plate").value.trim().toUpperCase(); if(!p) return; S.entrada.plate=p;S.entrada.read=p;S.entrada.status="leida";
-  S.alerts=S.alerts.filter(a=>a.tipo!=="placa"); log("Encargado corrigió la placa: "+p+" (RF-02)"); toast("Placa corregida. La pantalla de la entrada ya muestra "+p+"."); render();}
-function tmpPlate(){const p="TMP-"+String(Math.floor(Math.random()*900+100));S.entrada.plate=p;S.entrada.read=p;S.entrada.status="leida";
-  S.alerts=S.alerts.filter(a=>a.tipo!=="placa"); log("Identificador provisional asignado: "+p+" (RN-06)"); toast("Identificador provisional: "+p); render();}
-function manualConfirm(id){const s=stay(id);S.spots[s.spot]="O";s.estado="Ocupado";s.confirmada=now();if(!s.ingreso)s.ingreso=now();const c=center(s.spot);if(c)s.car={x:c.x,y:c.y};log(id+" · encargado confirmó "+s.spot+" manualmente (RN-04)");render();}
-function stopTime(id){const s=stay(id);s.pagoStop=now();log(`${id} · tiempo detenido a las ${fmtT(s.pagoStop)} · cobro ${money(calc(s,s.pagoStop).total)}`);renderAdmin();}
+function fixPlate(){const p=document.getElementById("a-plate").value.trim().toUpperCase(); if(!p) return;
+  const e=S.entrada; e.plate=p; e.read=p; S.alerts=S.alerts.filter(a=>a.tipo!=="placa");
+  log(`${S.session.u} corrigió la placa: ${p} (RF-02, RNF-09)`);
+  const s=stay(e.stayId);
+  if(s&&s.scanned){ s.placa=p; s.estado="Solicitud"; s.mensual=mensVigente(p,now()); e.status="escaneado"; toast("Placa corregida. La solicitud continúa en el celular del conductor."); }
+  else { afterPlate(); toast("Placa corregida. La pantalla de la entrada muestra el QR."); }
+  render();}
+function assignSP(){S.seq.sp++; const id="SP-"+String(S.seq.sp).padStart(3,"0");
+  const sp={marca:document.getElementById("sp-marca").value,color:document.getElementById("sp-color").value,modelo:document.getElementById("sp-modelo").value};
+  const e=S.entrada; e.plate=id; e.read=id; S.alerts=S.alerts.filter(a=>a.tipo!=="placa");
+  log(`${S.session.u} asignó el identificador provisional ${id} (${sp.marca}, ${sp.color}, ${sp.modelo}) (RF-02)`);
+  const s=stay(e.stayId);
+  if(s&&s.scanned){ s.placa=id; s.sp=sp; s.estado="Solicitud"; e.status="escaneado"; }
+  else { afterPlate(); const n=stay(S.entrada.stayId); if(n) n.sp=sp; }
+  toast(`Identificador provisional ${id} asignado.`); render();}
+function registerReal(aid){const a=S.alerts.find(x=>x.id===aid), s=stay(a.ref), sp=document.getElementById("rs-"+aid).value;
+  S.spots[sp]="O"; s.spot=sp; s.estado="Ocupado"; s.confirmada=now(); const c=center(sp); if(c) s.car={x:c.x,y:c.y};
+  S.alerts=S.alerts.filter(x=>x.id!==aid); log(`${s.id} · ${S.session.u} registró el puesto real ${sp} (RN-01)`); render();}
+function manualConfirm(id,aid){const s=stay(id); S.spots[s.spot]="O"; s.estado="Ocupado"; s.confirmada=now(); s.bloqueada=false; const c=center(s.spot); if(c) s.car={x:c.x,y:c.y};
+  if(aid) S.alerts=S.alerts.filter(x=>x.id!==aid); log(`${id} · ${S.session.u} verificó en sitio y marcó ${s.spot} «Ocupado» (RN-04)`); render();}
+function obsReview(id){const o=S.obs.find(x=>x.id===id);o.estado="en revisión";log(`Novedad ${id} en revisión (${S.session.u})`);render();}
+function obsResolve(id){const o=S.obs.find(x=>x.id===id);o.sol=(document.getElementById("sol-"+id).value||"Atendida en sitio").trim();o.estado="resuelta";log(`Novedad ${id} resuelta: ${o.sol} (RNF-09)`);render();}
+function stopTime(id){const s=stay(id);s.pagoStop=now();log(`${id} · tiempo detenido a las ${fmtT(s.pagoStop)} · cobro ${money(calc(s,s.pagoStop).total)} (RF-09)`);renderAdmin();}
 function resumeTime(id){const s=stay(id);s.pagoStop=null;log(`${id} · tiempo reanudado`);renderAdmin();}
-function confirmPay(id){const s=stay(id);const k=calc(s,s.pagoStop);s.pago={total:k.total,metodo:document.getElementById("a-met").value,ref:document.getElementById("a-ref").value,hora:s.pagoStop};
-  log(`${id} · pago confirmado ${money(k.total)} · ${s.pago.metodo}${s.pago.ref?" "+s.pago.ref:""} (RF-10)`); toast("Pago confirmado: "+money(k.total)+". Ya puede autorizar la salida."); render();}
-function recharge(id){const s=stay(id);s.pago=null;s.pagoStop=null;S.selPay=id;log(`${id} · gracia vencida: se recalcula el cobro (RN-08)`);adminTab("pagos");}
-function exitStay(id){const s=stay(id);S.spots[s.spot]="D";s.estado="Cerrada";s.salida=now();s.walker=null;log(`${id} · salida autorizada · talanquera abierta · ${s.spot} «Disponible» (RF-11, RF-12)`);toast("Salida autorizada. Estancia "+id+" cerrada.");render();}
-function simRead(p){const v=(p||document.getElementById("s-plate").value).trim().toUpperCase();
-  S.entrada={read:v,plate:v,status:v.includes("?")?"verificando":"leida",dest:null,stayId:null};
-  if(v.includes("?")) alertAdd("placa","Lectura de placa fallida","La cámara leyó «"+v+"». Corrija la placa.","#FDE8E8","#9B2C2C");
-  log("Lectura de placa en la entrada: "+v+" [simulado]"); toast("Placa leída: "+v+". Revise la pantalla de la entrada."); render();}
-function advance(n){S.offset+=n*60000;log("Reloj de la demostración adelantado "+n+" min [simulado]");toast("Reloj adelantado "+n+" minutos.");render();}
-function addMensual(){S.mensuales.push({placa:document.getElementById("m-p").value.toUpperCase(),nombre:document.getElementById("m-n").value,correo:document.getElementById("m-c").value,verificada:false,vigencia:""});log("Conductor mensual registrado; código enviado al correo [simulado]");renderAdmin();}
-function verify(i){const x=S.mensuales[i];x.verificada=true;x.vigencia="01/11/2026 – 30/11/2026";log("Cuenta "+x.placa+" verificada (RF-19); mensualidad registrada (RF-21)");renderAdmin();}
+function confirmPay(id){const s=stay(id), k=calc(s,s.pagoStop), paid=paidOf(s), due=Math.max(0,Math.round((k.total-paid)*100)/100), met=document.getElementById("a-met").value, ref=document.getElementById("a-ref").value.trim();
+  const monto=parseFloat(document.getElementById("a-monto").value.replace(",","."));
+  if(met!=="Efectivo"&&!ref){toast("La referencia es obligatoria con tarjeta o transferencia (RF-10).");return;}
+  if(isNaN(monto)||Math.abs(monto-due)>0.001){log(`${id} · registro de pago rechazado: monto ${isNaN(monto)?"inválido":money(monto)} ≠ ${money(due)} (RN-07)`);toast("El monto no coincide con la liquidación: el registro se rechaza (RN-07).");renderAdmin();return;}
+  const p={total:due,metodo:met,ref,hora:s.pagoStop}; s.pagos=s.pagos||[]; s.pagos.push(p); s.pago=p; s.pagoStop=null;
+  log(`${id} · pago confirmado ${money(due)}${paid?` (diferencia; total ${money(k.total)}, RN-08)`:""} · ${met}${ref?" "+ref:""} (RF-10)`); toast("Pago confirmado: "+money(due)+". Corren "+S.cfg.gracia+" min de gracia para salir."); render();}
+function recharge(id){const s=stay(id);s.pago=null;s.pagoStop=null;S.selPay=id;log(`${id} · gracia vencida: se recalcula desde el ingreso y se cobra la diferencia (RN-08)`);adminTab("pagos");}
+function mchk(id,k,v){S.manual[id]=S.manual[id]||{a:false,b:false,c:false};S.manual[id][k]=v;renderAdmin();}
+function authorizeExit(id,manual){const s=stay(id);
+  const vig=s.mensual&&calc(s,now()).mens, ok=vig||(s.pago&&now()<=s.pago.hora+S.cfg.gracia*60000);
+  if(!ok){log(`${id} · salida rechazada: pago no confirmado o gracia vencida (RF-11, RN-07, RN-08)`);toast("No se autoriza la salida: falta el pago o venció la gracia.");renderAdmin();return;}
+  if(manual){const m=S.manual[id]||{}; if(!(m.a&&m.b&&m.c)){toast("Complete las tres verificaciones manuales (RF-11).");return;}}
+  log(`Lectura de placa en la salida: ${s.placa} [simulado] (RF-01)`);
+  S.spots[s.spot]="D"; s.estado="Cerrada"; s.salida=now(); s.walker=null;
+  log(`${id} · salida ${manual?"autorizada manualmente por "+S.session.u+" (SP, RF-11)":"autorizada (RF-11)"} · talanquera de salida levantada · ${s.spot} «Disponible» · acceso QR revocado (RF-12)`);
+  toast("Salida autorizada. Estancia "+id+" cerrada."); render();}
+function simRead(p){newReading(p||document.getElementById("s-plate").value);toast("Placa leída. Revise la pantalla de la entrada.");render();}
+function advance(n){S.offset+=n*60000;log(`Reloj de la demostración adelantado ${n} min [simulado]`);toast(`Reloj adelantado ${n} minutos.`);render();}
+function fillLot(){ if(S.backupSpots){S.spots=S.backupSpots;S.backupSpots=null;log("Puestos restaurados [simulado]");}
+  else{S.backupSpots={...S.spots};Object.keys(S.spots).forEach(k=>{if(S.spots[k]==="D")S.spots[k]="O";});log("Todos los puestos disponibles marcados «Ocupado» [simulado]");}
+  render();}
+function addMensual(){const placa=document.getElementById("m-p").value.trim().toUpperCase(), correo=document.getElementById("m-c").value.trim();
+  if(S.mensuales.some(m=>m.placa===placa||m.correo===correo)){toast("Ya existe un conductor con esa placa o correo.");return;}
+  if(!placa||!correo){toast("Complete la placa y el correo.");return;}
+  const m={placa,nombre:document.getElementById("m-n").value,correo,verificada:false,code:null,mens:null};
+  S.mensuales.push(m); log(`${S.session.u} registró al conductor mensual ${placa} (RF-13)`); newCode(m);
+  toast("Conductor registrado. Para verificarlo: Página del conductor → P-00 → Iniciar sesión con su correo."); renderAdmin();}
+function registerMens(i){S.selMens=i;renderAdmin();}
+function mensForm(){
+  const m=S.selMens!=null?S.mensuales[S.selMens]:null; if(!m) return "";
+  const d=new Date(now()), h=new Date(d); h.setMonth(h.getMonth()+1);
+  return `<div class="card" style="display:flex;flex-direction:column;gap:10px;border:2px solid #1565C0"><div class="h2">${m.mens?"Renovar":"Registrar"} mensualidad</div><div class="small">RF-21 · solo para cuentas verificadas</div>
+    <div class="kv"><span>Placa</span><b>${esc(m.placa)}</b></div><div class="kv"><span>Conductor</span><b>${esc(m.nombre)}</b></div>
+    <div class="kv"><span>Valor</span><b>${money(S.cfg.mensualidad)}</b></div><div class="kv"><span>Vigencia</span><b>${fmtD(+d)} – ${fmtD(+h)}</b></div>
+    <div class="form"><div><label class="label">Método</label><select class="input" id="ms-met"><option>Efectivo</option><option>Tarjeta</option><option>Transferencia</option></select></div>
+    <div><label class="label">Referencia</label><input class="input" id="ms-ref" placeholder="Tarjeta o transf."></div></div>
+    <button class="btn primary" onclick="confirmMens()">Confirmar mensualidad</button><button class="lnk" onclick="S.selMens=null;renderAdmin()">Cancelar</button>
+    <div class="small">Vigente desde la fecha de pago hasta el mismo día del mes siguiente. El valor se cambia en «Configuración».</div></div>`;
+}
+function confirmMens(){const m=S.mensuales[S.selMens];
+  if(!m||!m.verificada){toast("La mensualidad solo se registra para cuentas verificadas (RF-21).");return;}
+  const met=document.getElementById("ms-met").value, ref=document.getElementById("ms-ref").value.trim();
+  if(met!=="Efectivo"&&!ref){toast("La referencia es obligatoria con tarjeta o transferencia.");return;}
+  const desde=new Date(now()), hasta=new Date(desde); hasta.setMonth(hasta.getMonth()+1);
+  m.mens={valor:S.cfg.mensualidad,metodo:met,ref,desde:+desde,hasta:+hasta}; S.selMens=null;
+  log(`${S.session.u} registró la mensualidad de ${m.placa}: ${money(S.cfg.mensualidad)} · ${met}${ref?" "+ref:""} · vigente hasta ${fmtD(+hasta)} (RF-21)`);
+  toast("Mensualidad vigente hasta "+fmtD(+hasta)); renderAdmin();}
+function expireMens(){const m=S.mensuales.find(x=>x.placa==="PBX-7781"); if(!m||!m.mens) return;
+  m.mens.hasta=now()-60000; if(m.mens.desde>m.mens.hasta) m.mens.desde=m.mens.hasta-30*86400000;
+  log("Mensualidad de PBX-7781 marcada como vencida [simulado] (RN-11)"); toast("La mensualidad de PBX-7781 quedó vencida."); render();}
+function createCuenta(){const u=document.getElementById("u-u").value.trim();
+  if(!u||S.cuentas.some(c=>c.u===u)){toast("Ese usuario ya existe.");return;}
+  S.cuentas.push({u,n:document.getElementById("u-n").value,c:document.getElementById("u-c").value,p:null,e:"Pendiente de activación"});
+  log(`${S.session.u} creó la cuenta ${u}: «pendiente de activación» (RF-24)`); renderAdmin();}
+function toggleCuenta(i,e){const c=S.cuentas[i]; if(c.u===S.session.u) return; c.e=e; log(`${S.session.u} cambió la cuenta ${c.u} a «${e.toLowerCase()}» (RF-24)`); renderAdmin();}
 
-/* ===================== RELOJ / TEMPORIZADORES ===================== */
+/* ===================== RELOJ Y TIEMPOS ===================== */
 function tick(){
   document.getElementById("clock").textContent="🕒 "+fmtT(now());
   let changed=false;
-  S.stays.forEach(s=>{ if(s.estado==="En reserva" && !s.bloqueada && Date.now()>=s.reservaFin){
-    S.spots[s.spot]="D"; s.estado="Cancelada";
-    alertAdd("reserva",`Reserva sin confirmar · ${s.spot} · ${s.placa}`,`No pulsó «Estacioné aquí» en ${S.cfg.reserva} min. El puesto volvió a «Disponible» (RF-17).`,"#FFF4D6","#7B5A12");
-    if(S.entrada.stayId===s.id) S.entrada.status="eligiendo", S.entrada.stayId=null;
-    log(`${s.id} · reserva vencida → ${s.spot} «Disponible»`); changed=true; }});
+  S.stays.forEach(s=>{ if(s.estado==="En reserva"&&!s.bloqueada&&Date.now()>=s.reservaFin){
+    S.spots[s.spot]="D"; changed=true;
+    if(!s.ingreso){ s.estado="Cancelada"; log(`${s.id} · no ingresó dentro del tiempo de reserva: «Reserva cancelada» (RN-05)`);
+      if(S.entrada.stayId===s.id) S.entrada={status:"libre",read:"—",plate:"—",stayId:null}; }
+    else { s.estado="Ubicación no confirmada";
+      alertAdd({tipo:"unconf",ref:s.id,t:`Ubicación no confirmada · ${s.spot} · ${s.placa}`,d:`No pulsó «Estacioné aquí» en ${S.cfg.reserva} min; ${s.spot} volvió a «Disponible». Acérquese al vehículo y registre su puesto real (RF-17, RN-01).`,bg:"#FFF4D6",fg:"#7B5A12"});
+      log(`${s.id} · reserva vencida sin confirmación → ${s.spot} «Disponible», alerta al encargado (RF-17)`); } }});
+  S.stays.forEach(s=>{ if(s.bloqueada&&s.estado==="En reserva"&&!S.alerts.some(a=>a.tipo==="verif"&&a.ref===s.id)){
+    alertAdd({tipo:"verif",ref:s.id,t:`Verificar puesto · ${s.spot} · ${s.placa}`,d:"El conductor no pudo validar su ubicación. El puesto se mantiene «En reserva» hasta que lo verifique (RN-04, RN-12).",bg:"#FFF4D6",fg:"#7B5A12"}); changed=true; }});
   if(changed){ render(); return; }
-  if(onView("conductor")){ const s=stay(S.current); if(s&&s.estado==="En reserva") renderConductor(true); }
-  if(onView("admin")){
+  if(onView("conductor")){ const s=stay(S.current);
+    if(S.phone.view==="estancia"&&s&&s.estado==="En reserva"){ const t=document.getElementById("c-timer"); const left=Math.max(0,Math.round((s.reservaFin-Date.now())/1000)); if(t&&!s.bloqueada) t.textContent="Reserva "+Math.floor(left/60)+":"+String(left%60).padStart(2,"0"); }
+    if(S.phone.view==="verificar"){ const m=S.mensuales.find(x=>x.correo===S.phone.email), el=document.getElementById("code-left");
+      if(el&&m&&m.code&&!m.code.used){const left=m.code.exp-now(); el.textContent=left>0?"Vence en "+Math.floor(left/60000)+":"+String(Math.floor(left/1000)%60).padStart(2,"0"):"El código venció.";} } }
+  if(onView("admin")&&S.session){
     if(S.adminTab==="pagos"){ const s=stay(S.selPay); if(s&&!s.pagoStop&&!s.pago){ const k=calc(s,now());
       const set=(id,v)=>{const e=document.getElementById(id);if(e)e.textContent=v;};
-      set("pay-hora","En curso · "+fmtT(now())); set("pay-dur",dur(k.ms)); set("pay-fr",k.fr); set("pay-tot",k.mens?"Mensualidad vigente · USD 0,00":money(k.total)); } }
-    if(S.adminTab==="salidas") renderAdmin();
+      set("pay-hora","En curso · "+fmtT(now())); set("pay-dur",dur(k.ms)); set("pay-fr",k.fr); set("pay-tot",money(k.total)); set("pay-due",money(Math.max(0,k.total-paidOf(s)))); } }
+    if(S.adminTab==="salidas"){ let need=false;
+      S.stays.forEach(s=>{const el=document.getElementById("g-"+s.id); if(!el||!s.pago||(s.mensual&&calc(s,now()).mens)) return;
+        const g=s.pago.hora+S.cfg.gracia*60000-now(); if(g<0){ if(!el.dataset.exp) need=true; } else el.textContent=Math.floor(g/60000)+" min "+String(Math.floor(g/1000)%60).padStart(2,"0")+" s"; });
+      if(need) renderAdmin(); }
   }
 }
 function render(){ renderEntrada(); renderConductor(); renderAdmin(); }
-function resetAll(){ clearInterval(S.tick); initState(); go("entrada"); S.tick=setInterval(tick,1000); toast("Demostración reiniciada"); }
-initState(); render(); tick(); S.tick=setInterval(tick,1000);
+function resetAll(){ clearInterval(S.tick); initState(); newReading("DEM-1234"); go("entrada"); S.tick=setInterval(tick,1000); toast("Demostración reiniciada"); }
+initState(); newReading("DEM-1234"); render(); tick(); S.tick=setInterval(tick,1000);
 </script>
 </body>
 </html>
